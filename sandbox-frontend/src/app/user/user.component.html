@@ -1,0 +1,7 @@
+<form (ngSubmit)="saveUser()">
+    <input [(ngModel)]="form.name" name="name" placeholder="Name" required>
+    <input [(ngModel)]="form.email" name="email" placeholder="Email" type="email" required>
+    <button type="submit" [disabled]="!form.name || !form.email">Create User</button>
+</form>
+
+<app-user-list></app-user-list>

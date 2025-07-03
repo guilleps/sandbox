@@ -1,0 +1,9 @@
+<h2>User List</h2>
+<ul>
+  <li *ngFor="let user of users">
+    {{ user.name }} | {{ user.email }}
+    <button (click)="viewTasks(user.id)">Select</button>
+  </li>
+</ul>
+
+<app-task-list [userId]="selectedUserId" ></app-task-list>
