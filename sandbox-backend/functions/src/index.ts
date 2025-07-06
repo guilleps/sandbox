@@ -4,8 +4,8 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { initialize } from "fireorm";
 import { buildSchema } from "type-graphql";
-import { TaskResolver } from "./resolvers/task.resolver";
-import { UserResolver } from "./resolvers/user.resolver";
+import { TaskResolver } from "./tasks/resolvers/task.resolver";
+import { UserResolver } from "./users/resolvers/user.resolver";
 
 // iniciamos firebase sdk y firestore
 admin.initializeApp();

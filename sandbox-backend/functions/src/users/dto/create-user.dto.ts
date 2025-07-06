@@ -8,15 +8,3 @@ export class CreateUser {
   @Field()
   email!: string;
 }
-
-@InputType()
-export class GetUserByEmail {
-  @Field()
-  email!: string;
-}
-
-@InputType()
-export class DeleteUserById {
-  @Field()
-  id!: string;
-}

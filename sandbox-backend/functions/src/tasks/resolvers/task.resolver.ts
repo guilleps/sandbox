@@ -1,7 +1,9 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
-import { TaskRepository } from "../repositories/task.repository";
 import { Task } from "../models/Task";
-import { CreateTask, DeleteTask, MarkTaskAsDone } from "../dto/task.dto";
+import { TaskRepository } from "../repositories/task.repository";
+import { CreateTask } from "../dto/create-task.dto";
+import { MarkTaskAsDone } from "../dto/mark-task.dto";
+import { DeleteTask } from "../dto/delete-task.dto";
 
 @Resolver(() => Task)
 export class TaskResolver {
@@ -12,11 +14,6 @@ export class TaskResolver {
         return this.taskRepo["repo"].whereEqualTo("assignedToUserId", userId).find();
     }
 
-    @Query(() => Number)
-    async sum(@Arg("num1") num1: number, @Arg("num2") num2: number): Promise<number> {
-      return num1 + num2;
-    }
-
     @Mutation(() => Task)
     async createTask(@Arg("data") data: CreateTask): Promise<Task> {
       return this.taskRepo.create(data);
@@ -24,7 +21,7 @@ export class TaskResolver {
   
     @Mutation(() => Task)
     async markTaskAsDone(@Arg("data") data: MarkTaskAsDone): Promise<Task> {
-      return this.taskRepo.markDone(data);
+      return this.taskRepo.markDone(data.taskId, data.done);
     }
   
     @Mutation(() => String)

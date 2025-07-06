@@ -1,9 +1,11 @@
 import { Arg, Field, Mutation, ObjectType, Query, Resolver } from "type-graphql";
 import { User } from "../models/User";
 import { UserRepository } from "../repositories/user.repository";
-import { CreateUser } from "../dto/user.dto";
-import { Task } from "../models/Task";
-import { TaskRepository } from "../repositories/task.repository";
+import { CreateUser } from "../dto/create-user.dto";
+import { Task } from "../../tasks/models/Task";
+import { TaskRepository } from "../../tasks/repositories/task.repository";
+import { DeleteUser } from "../dto/delete-user.dto";
+import { UserByEmail } from "../dto/user-by-email.dto";
 
 @ObjectType()
 class UserWithTasks {
@@ -19,8 +21,8 @@ export class UserResolver {
     private readonly userRepo = new UserRepository();
 
     @Query(() => User, { nullable: true })
-    async userByEmail(@Arg("email") email: string): Promise<User | null> {
-        return this.userRepo.findByEmail(email);
+    async userByEmail(@Arg("data") data: UserByEmail): Promise<User | null> {
+        return this.userRepo.findByEmail(data.email);
     }
 
     @Query(() => [User])
@@ -34,8 +36,8 @@ export class UserResolver {
     }
 
     @Mutation(() => Boolean)
-    async delete(@Arg("userId") userId: string): Promise<Boolean> {
-        await this.userRepo.delete(userId);
+    async delete(@Arg("data") data: DeleteUser): Promise<Boolean> {
+        await this.userRepo.delete(data.id);
         return true;
     }
 
