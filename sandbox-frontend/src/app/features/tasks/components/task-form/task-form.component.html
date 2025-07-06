@@ -1,9 +1,9 @@
 <nz-card nzTitle="Asignar tareas" class="mb-4">
-    <form nz-form [formGroup]="taskForm" (ngSubmit)="assignTask()">
+    <form nz-form (ngSubmit)="assignTask()" nzLayout="vertical">
         <nz-form-item>
-            <nz-form-label [nzSpan]="6">Usuario</nz-form-label>
-            <nz-form-control [nzSpan]="18">
-                <nz-select formControlName="userId" nzPlaceHolder="Selecciona un usuario">
+            <nz-form-label [nzRequired]="true" nzFor="userId">Usuario</nz-form-label>
+            <nz-form-control>
+                <nz-select [(ngModel)]="taskForm.assignedToUserId" name="assignedToUserId" nzPlaceHolder="Selecciona un usuario">
                     @for (user of users; track $index) {
                     <nz-option [nzValue]="user.user.id" [nzLabel]="user.user.name"></nz-option>
                     }
@@ -12,22 +12,25 @@
         </nz-form-item>
 
         <nz-form-item>
-            <nz-form-label [nzSpan]="6">Tarea</nz-form-label>
-            <nz-form-control [nzSpan]="18">
-                <input nz-input formControlName="title" placeholder="Ej. Revisar informes" />
+            <nz-form-label [nzRequired]="true" nzFor="title">Tarea</nz-form-label>
+            <nz-form-control>
+                <input nz-input [(ngModel)]="taskForm.title" id="title" name="title" placeholder="Ej. Revisar informes" />
             </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
-            <nz-form-label [nzSpan]="6">Description</nz-form-label>
-            <nz-form-control [nzSpan]="18">
-                <input nz-input formControlName="description" placeholder="xxxxx" />
+            <nz-form-label nzFor="description">Descripción</nz-form-label>
+            <nz-form-control>
+                <input nz-input [(ngModel)]="taskForm.description" id="description" name="description" placeholder="Ej. Revisar resumen mensual" />
             </nz-form-control>
         </nz-form-item>
 
         <nz-form-item>
-            <nz-form-control [nzSpan]="24" class="text-right">
-                <button nz-button nzType="primary" [disabled]="taskForm.invalid">Asignar tarea</button>
+            <nz-form-control>
+                <button nz-button nzType="primary" nzShape="round" [disabled]="!taskForm.assignedToUserId || !taskForm.title" htmlType="submit">
+                    <nz-icon nzType="plus" nzTheme="outline"></nz-icon>
+                    Asignar tarea
+                </button>
             </nz-form-control>
         </nz-form-item>
     </form>

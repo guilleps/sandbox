@@ -1,21 +1,24 @@
-.container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "adder adder adder graphic graphic graphic graphic graphic"
-        "adder adder adder graphic graphic graphic graphic graphic"
-        "adder adder adder graphic graphic graphic graphic graphic"
-        "adder adder adder graphic graphic graphic graphic graphic"
-        "adder adder adder graphic graphic graphic graphic graphic";
+.two-column-layout {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
 }
 
-.adder {
-    grid-area: adder;
+.column-left {
+    flex: 1 1 320px;
+    min-width: 320px;
 }
 
-.graphic {
-    grid-area: graphic;
+.column-right {
+    flex: 2 1 600px;
+    min-width: 400px;
+}
+
+.user-form {
+    max-width: 400px;
+    margin-bottom: 24px;
+}
+
+.layout-user-form {
+    padding: 12px;
 }

@@ -12,6 +12,7 @@ import { TasksModule } from "../tasks/tasks.module";
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzButtonModule } from "ng-zorro-antd/button";
 import { NzInputModule } from "ng-zorro-antd/input";
+import { NzIconModule } from "ng-zorro-antd/icon";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { NzInputModule } from "ng-zorro-antd/input";
     CommonModule,
     NzInputModule,
     NzButtonModule,
+    NzIconModule,
     NzCardModule,
     NzFormModule,
     NzDividerModule,

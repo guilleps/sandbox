@@ -8,27 +8,34 @@ import { TaskFormComponent } from './components/task-form/task-form.component';
 import { TaskService } from './services/task.service';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzSelectModule } from "ng-zorro-antd/select";
-import { ReactiveFormsModule } from '@angular/forms';
-import { VisualGraphicComponent } from './components/visual-graphic/visual-graphic.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from "ng-zorro-antd/icon";
+import { NzCheckboxModule } from "ng-zorro-antd/checkbox";
+import { TaskChartComponent } from './components/task-chart/task-chart.component';
 
 @NgModule({
   declarations: [
     TaskListComponent,
     TaskFormComponent,
-    VisualGraphicComponent
+    TaskChartComponent
   ],
   imports: [
     CommonModule,
+    NzButtonModule,
+    NzIconModule,
     NzCardModule,
+    NzCheckboxModule,
     NzListModule,
     NzTagModule,
     NzFormModule,
     NzSelectModule,
     NzGridModule,
     ReactiveFormsModule,
+    FormsModule
   ],
   providers: [TaskService],
-  exports: [TaskListComponent, TaskFormComponent, VisualGraphicComponent]
+  exports: [TaskListComponent, TaskFormComponent, TaskChartComponent]
 })
 export class TasksModule { }

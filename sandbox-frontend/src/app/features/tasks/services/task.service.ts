@@ -3,6 +3,7 @@ import { Apollo, gql } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
 import { TaskDTO } from '../dto/task.dto';
 import { CreateTaskDTO } from '../dto/creat-task.dto';
+import { TaskDoneDTO } from '../dto/task-done.dto';
 
 @Injectable()
 export class TaskService {
@@ -28,7 +29,6 @@ export class TaskService {
           data: {
             title: task.title,
             description: task.description,
-            done: task.done,
             assignedToUserId: task.assignedToUserId
           }
         }
@@ -54,5 +54,22 @@ export class TaskService {
         variables: { userId },
       })
       .valueChanges.pipe(map((result) => result.data.taskByUser));
+  }
+
+  markTaskById(taskId: string, done: boolean): Observable<TaskDoneDTO> {
+    const MARK_TASK = gql`
+    mutation MarkTaskAsDone($data: MarkTaskAsDone!) {
+      markTaskAsDone(data: $data) {
+        id
+        title
+        done
+      }
+    }`;
+
+    return this.apollo.mutate<{ markTaskAsDone: TaskDoneDTO }>({
+      mutation: MARK_TASK,
+      variables: { data: { taskId, done } }
+    })
+    .pipe(map(res => res.data!.markTaskAsDone));
   }
 }

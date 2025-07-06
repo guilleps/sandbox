@@ -7,12 +7,12 @@ import { UserService } from "../../../users/services/user.service";
 import { UserDTO } from "../../../users/dto/user.dto";
 
 @Component({
-  selector: 'app-visual-graphic',
+  selector: 'app-task-chart',
   standalone: false,
-  templateUrl: './visual-graphic.component.html',
-  styleUrl: './visual-graphic.component.css'
+  templateUrl: './task-chart.component.html',
+  styleUrl: './task-chart.component.css'
 })
-export class VisualGraphicComponent implements OnInit, OnDestroy {
+export class TaskChartComponent implements OnInit, OnDestroy {
   users!: UserList[];
   barPlot: Bar | undefined;
   private subscriptions = new Subscription();
@@ -55,34 +55,38 @@ export class VisualGraphicComponent implements OnInit, OnDestroy {
   renderChart(): void {
     if (!this.users || this.users.length === 0) return;
 
-    const data = this.users.map(u => ({
-      name: u.user.name,
-      taskCount: u.tasks.length,
-    }));
-    console.log('[Chart] Datos actualizados ANTES DE ELSE', data);
+    const data = this.users.flatMap(u => [
+      {
+        name: u.user.name,
+        type: 'Pendientes',
+        count: u.tasks.filter(t => !t.done).length,
+      },
+      {
+        name: u.user.name,
+        type: 'Completadas',
+        count: u.tasks.filter(t => t.done).length,
+      },
+    ]);
 
     if (!this.barPlot) {
       this.barPlot = new Bar('container', {
         data,
-        xField: 'taskCount',
+        isStack: true,
+        xField: 'count',
         yField: 'name',
-        meta: {
-          taskCount: { alias: 'Total de tareas' }
+        seriesField: 'type',
+        meta: { count: { alias: 'Total de tareas' }, type: { alias: 'Estado' } },
+        color: ['#34E084', '#3468E0'],
+        barStyle: {
+          textAlign: "center",
+          fontSize: 18,
         },
-        label: { position: 'middle', style: { fill: '#fff' } },
+        label: { position: 'middle', style: { fill: 'black' } },
       });
       this.barPlot.render();
     } else {
       this.barPlot.changeData(data);
-      console.log('[Chart] Datos actualizados DESPUES DE ELSE:', data);
     }
-  }
-
-  getTaskDescription(user: any): string {
-    if (!user.tasks || user.tasks.length === 0) {
-      return 'Ninguna tarea asignada';
-    }
-    return 'Tareas: ' + user.tasks.map((t: any) => t.title).join(', ');
   }
 
 }

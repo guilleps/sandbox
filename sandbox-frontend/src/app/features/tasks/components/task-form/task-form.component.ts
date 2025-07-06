@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from '../../services/task.service';
 import { UserList } from '../../../users/dto/user-list.dto';
 import { UserService } from '../../../users/services/user.service';
+import { CreateTaskDTO } from '../../dto/creat-task.dto';
 
 @Component({
   selector: 'app-task-form',
@@ -11,42 +11,43 @@ import { UserService } from '../../../users/services/user.service';
   styleUrl: './task-form.component.css'
 })
 export class TaskFormComponent {
-  taskForm: FormGroup;
+  taskForm: CreateTaskDTO = { title: '', description: '', assignedToUserId: '' };
   users: UserList[] = [];
 
   constructor(
     private taskService: TaskService,
     private userService: UserService,
-    private fb: FormBuilder
   ) {
-    this.taskForm = this.fb.group({
-      userId: [null, Validators.required],
-      title: ['', Validators.required],
-      description: [''], // debe ser opcional
-    });
-
     this.loadUsers();
   }
 
   loadUsers(): void {
-    this.userService.getAllUsersAndTasks().subscribe((data) => {
-      this.users = data;
+    this.userService.getAllUsersAndTasks().subscribe({
+      next: (data) => {
+        this.users = data;
+      },
+      error: (err) => {
+        console.error('Error al cargar usuarios:', err);
+      }
     });
   }
 
   assignTask(): void {
-    const { userId, title, description } = this.taskForm.value;
-    console.log('taskform', { userId, title, description });
+    const { assignedToUserId, title, description } = this.taskForm;
+
+    if (!assignedToUserId || !title) {
+      console.warn('Formulario inválido');
+      return;
+    }
 
     this.taskService.createTask({
       title,
       description,
-      done: false,
-      assignedToUserId: userId
+      assignedToUserId
     }).subscribe({
       next: (res) => {
-        console.log('Tarea creada', res.id);
-        this.taskForm.reset();
+        console.log('Tarea creada', res);
+        this.taskForm = { title: '', description: '', assignedToUserId: '' };
         this.loadUsers();
       },
       error: (err) => console.error("No se creó la tarea, [ERROR]")

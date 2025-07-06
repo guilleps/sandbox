@@ -20,4 +20,19 @@ export class TaskListComponent implements OnChanges {
     });
   }
 
+  onToggle(task: TaskListDTO): void {
+    const nuevoEstado = !task.done;
+
+    this.taskService.markTaskById(task.id, nuevoEstado).subscribe({
+      next: (res) => {
+        this.tasks = this.tasks.map(t =>
+          t.id === task.id ? { ...t, done: res.done } : t
+        );
+        console.log('Estado actualizado:', res);
+      },
+      error: err => {
+        console.error('Error al cambiar estado:', err);
+      }
+    });
+  }
 }

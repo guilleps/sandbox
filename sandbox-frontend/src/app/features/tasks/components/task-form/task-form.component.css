@@ -1,9 +1,12 @@
-.chart {
-    height: 320px;
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .mb-4 {
     margin-bottom: 24px;
+    padding: 12px;
 }
 
 .mt-4 {
@@ -12,4 +15,9 @@
 
 .text-right {
     text-align: right;
+}
+
+button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
 }

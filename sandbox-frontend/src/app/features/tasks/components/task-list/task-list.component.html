@@ -9,10 +9,12 @@
     <nz-list nzBordered nzItemLayout="horizontal">
         @for (t of tasks; track $index) {
         <nz-list-item>
-            <span>{{ t.title }}</span>
+            <label nz-checkbox [ngModel]="t.done" (ngModelChange)="onToggle(t)">
+                <span [ngClass]="t.done ? 'task-completed' : 'task-pending'">{{ t.title }}</span>
+            </label>
             <nz-tag [nzColor]="t.done ? 'green' : 'red'" class="ml-2">
                 {{ t.done ? 'Completada' : 'Pendiente' }}
-            </nz-tag>w
+            </nz-tag>
         </nz-list-item>
         }
     </nz-list>

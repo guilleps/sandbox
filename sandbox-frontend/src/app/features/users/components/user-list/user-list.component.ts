@@ -25,7 +25,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.loadUsers();
 
     const sub = this.eventBus.on<UserDTO>('userCreated').subscribe((nuevoUsuario) => {
-      // console.log('[ON] Evento userCreated recibido en USER-LIST:', nuevoUsuario);
+      console.log('[ON] Evento userCreated recibido en USER-LIST:', nuevoUsuario);
       this.loadUsers();
     })
     this.subscriptions.add(sub);

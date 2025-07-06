@@ -19,6 +19,9 @@ export class CreateTask {
 export class MarkTaskAsDone {
   @Field()
   taskId!: string;
+
+  @Field()
+  done!: boolean;
 }
 
 @InputType()

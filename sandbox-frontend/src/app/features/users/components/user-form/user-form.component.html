@@ -1,11 +1,7 @@
-<nz-row [nzGutter]="24">
-
-    <nz-col nzXs="24" nzMd="8">
-        <nz-card nzTitle="Nuevo usuario">
-
-            <form nz-form (ngSubmit)="saveUser()" class="user-form" [nzLayout]="'vertical'"
-                style="max-width: 400px; margin-bottom: 24px;">
-
+<div class="two-column-layout">
+    <div class="column-left">
+        <nz-card nzTitle="Nuevo usuario" class="layout-user-form">
+            <form nz-form (ngSubmit)="saveUser()" class="user-form" [nzLayout]="'vertical'">
                 <nz-form-item>
                     <nz-form-label [nzRequired]="true" nzFor="name">Nombre</nz-form-label>
                     <nz-form-control>
@@ -24,7 +20,8 @@
 
                 <nz-form-item>
                     <nz-form-control>
-                        <button nz-button nzType="primary" [disabled]="!form.name || !form.email" htmlType="submit">
+                        <button nz-button nzType="primary" [disabled]="!form.name || !form.email" htmlType="submit" nzShape="round">
+                            <nz-icon nzType="plus" nzTheme="outline" />
                             Crear usuario
                         </button>
                     </nz-form-control>
@@ -32,12 +29,9 @@
             </form>
         </nz-card>
 
-        <nz-divider></nz-divider>
-
         <app-user-list></app-user-list>
-    </nz-col>
-
-    <nz-col nzXs="24" nzMd="16">
-        <app-visual-graphic></app-visual-graphic>
-    </nz-col>
-</nz-row>
+    </div>
+    <div class="column-right">
+        <app-task-chart></app-task-chart>
+    </div>
+</div>

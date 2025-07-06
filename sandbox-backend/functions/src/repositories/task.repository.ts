@@ -1,5 +1,6 @@
 import { BaseFirestoreRepository, getRepository } from "fireorm";
 import { Task } from "../models/Task";
+import { MarkTaskAsDone } from "../dto/task.dto";
 
 // abstraemos la llamada/accesso a firestore
 export class TaskRepository {
@@ -11,9 +12,9 @@ export class TaskRepository {
         return this.repo.create(task as Task);
     }
 
-    async markDone(taskId: string): Promise<Task> {
-        const task = await this.repo.findById(taskId);
-        task.done = true;
+    async markDone(data: MarkTaskAsDone): Promise<Task> {
+        const task = await this.repo.findById(data.taskId);
+        task.done = data.done;
         return this.repo.update(task);
     }
 

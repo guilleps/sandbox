@@ -1,0 +1,18 @@
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ml-2 {
+    margin-left: 8px;
+}
+
+.task-completed {
+    text-decoration: line-through;
+    color: #52c41a;
+}
+
+.task-pending {
+    color: #fa541c;
+}

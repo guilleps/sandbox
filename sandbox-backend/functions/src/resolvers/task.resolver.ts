@@ -24,7 +24,7 @@ export class TaskResolver {
   
     @Mutation(() => Task)
     async markTaskAsDone(@Arg("data") data: MarkTaskAsDone): Promise<Task> {
-      return this.taskRepo.markDone(data.taskId);
+      return this.taskRepo.markDone(data);
     }
   
     @Mutation(() => String)
