@@ -1,12 +1,20 @@
-<div *ngIf="tasks.length === 0">
-  <p>No tiene tareas el wachin</p>
-</div>
+@if (userId && tasks.length === 0) {
+<nz-card nzSize="small">
+    <p>No tiene tareas asignadas</p>
+</nz-card>
+}
 
-<div *ngIf="tasks.length !== 0">
-  <h2>Tareas del usuario</h2>
-  <ul>
-    <li *ngFor="let task of tasks">
-      {{ task.title }} - {{ task.done ? '✅' : '⏳' }}
-    </li>
-  </ul>
-</div>
+@if (tasks.length > 0) {
+<nz-card nzTitle="Tareas">
+    <nz-list nzBordered nzItemLayout="horizontal">
+        @for (t of tasks; track $index) {
+        <nz-list-item>
+            <span>{{ t.title }}</span>
+            <nz-tag [nzColor]="t.done ? 'green' : 'red'" class="ml-2">
+                {{ t.done ? 'Completada' : 'Pendiente' }}
+            </nz-tag>
+        </nz-list-item>
+        }
+    </nz-list>
+</nz-card>
+}

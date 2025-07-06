@@ -1,7 +1,18 @@
-import { Arg, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Field, Mutation, ObjectType, Query, Resolver } from "type-graphql";
 import { User } from "../models/User";
 import { UserRepository } from "../repositories/user.repository";
 import { CreateUser } from "../dto/user.dto";
+import { Task } from "../models/Task";
+import { TaskRepository } from "../repositories/task.repository";
+
+@ObjectType()
+class UserWithTasks {
+    @Field(() => User)
+    user!: User;
+
+    @Field(() => [Task])
+    tasks!: Task[];
+}
 
 @Resolver(() => User)
 export class UserResolver {
@@ -26,6 +37,21 @@ export class UserResolver {
     async delete(@Arg("userId") userId: string): Promise<Boolean> {
         await this.userRepo.delete(userId);
         return true;
+    }
+
+    @Query(() => [UserWithTasks])
+    async getUsersWithTasks(): Promise<UserWithTasks[]> {
+        const users = await this.userRepo.getAllUsers();
+        const taskRepo = new TaskRepository();
+
+        const userTasks = await Promise.all(
+            users.map(async (user) => {
+                const tasks = await taskRepo["repo"].whereEqualTo("assignedToUserId", user.id).find();
+                return { user, tasks };
+            })
+        );
+
+        return userTasks;
     }
 }
 

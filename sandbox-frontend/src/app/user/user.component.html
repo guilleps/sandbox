@@ -1,7 +1,43 @@
-<form (ngSubmit)="saveUser()">
-    <input [(ngModel)]="form.name" name="name" placeholder="Name" required>
-    <input [(ngModel)]="form.email" name="email" placeholder="Email" type="email" required>
-    <button type="submit" [disabled]="!form.name || !form.email">Create User</button>
-</form>
+<nz-row [nzGutter]="24">
 
-<app-user-list></app-user-list>
+    <nz-col nzXs="24" nzMd="8">
+        <nz-card nzTitle="Nuevo usuario">
+
+            <form nz-form (ngSubmit)="saveUser()" class="user-form" [nzLayout]="'vertical'"
+                style="max-width: 400px; margin-bottom: 24px;">
+
+                <nz-form-item>
+                    <nz-form-label [nzRequired]="true" nzFor="name">Nombre</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input [(ngModel)]="form.name" name="name" id="name" placeholder="Ingresa tu nombre"
+                            required />
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-label [nzRequired]="true" nzFor="email">Correo</nz-form-label>
+                    <nz-form-control>
+                        <input nz-input [(ngModel)]="form.email" name="email" id="email"
+                            placeholder="correo@ejemplo.com" type="email" required />
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item>
+                    <nz-form-control>
+                        <button nz-button nzType="primary" [disabled]="!form.name || !form.email" htmlType="submit">
+                            Crear usuario
+                        </button>
+                    </nz-form-control>
+                </nz-form-item>
+            </form>
+        </nz-card>
+
+        <nz-divider></nz-divider>
+
+        <app-user-list></app-user-list>
+    </nz-col>
+
+    <nz-col nzXs="24" nzMd="16">
+        <app-visual-graphic></app-visual-graphic>
+    </nz-col>
+</nz-row>

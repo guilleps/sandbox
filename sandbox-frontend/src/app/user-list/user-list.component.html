@@ -1,9 +1,15 @@
-<h2>User List</h2>
-<ul>
-  <li *ngFor="let user of users">
-    {{ user.name }} | {{ user.email }}
-    <button (click)="viewTasks(user.id)">Select</button>
-  </li>
-</ul>
+<nz-card nzTitle="Usuarios">
+    <nz-list nzBordered nzItemLayout="horizontal">
+        @for (user of users; track $index) {
+        <nz-list-item>
+            <nz-list-item-meta [nzTitle]="user.name" [nzDescription]="user.email">
+            </nz-list-item-meta>
+            <button nz-button nzSize="small" (click)="viewTasks(user.id)">
+                Ver tareas
+            </button>
+        </nz-list-item>
+        }
+    </nz-list>
 
-<app-task-list [userId]="selectedUserId" ></app-task-list>
+    <app-task-list [userId]="selectedUserId"></app-task-list>
+</nz-card>

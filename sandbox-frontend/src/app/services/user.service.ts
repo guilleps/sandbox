@@ -1,22 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
-import gql from 'graphql-tag';
-import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { CreateUserDTO } from 'src/dto/create-user.dto';
-import { UserDTO } from 'src/dto/user.dto';
+import { map, Observable } from 'rxjs';
+import { CreateUserDTO } from '../dto/create-user.dto';
+import { UserDTO } from '../dto/user.dto';
+import { UserList } from '../dto/user-list.dto';
+import { Apollo, gql } from 'apollo-angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private userCreated$ = new Subject<void>();
 
   constructor(private apollo: Apollo) { }
-
-  get userCreatedObservable() {
-    return this.userCreated$.asObservable();
-  }
 
   createUser(user: CreateUserDTO): Observable<UserDTO> {
     const CREATE_USER = gql`
@@ -34,12 +28,7 @@ export class UserService {
         mutation: CREATE_USER,
         variables: { name: user.name, email: user.email },
       })
-      .pipe(
-        map(res => {
-          this.userCreated$.next();
-          return res.data!.createUser
-        })
-      );
+      .pipe(map(res => res.data!.createUser));
   }
 
   getAllUsers(): Observable<UserDTO[]> {
@@ -55,9 +44,37 @@ export class UserService {
 
     return this.apollo
       .watchQuery<{ getAllUsers: UserDTO[] }>({
-        query: GET_ALL_USERS
+        query: GET_ALL_USERS,
+        fetchPolicy: 'network-only'
       })
       .valueChanges
       .pipe(map(result => result.data.getAllUsers));
+  }
+
+  getAllUsersAndTasks(): Observable<UserList[]> {
+    const USERS_WITH_TASKS = gql`
+      query {
+        getUsersWithTasks {
+          user {
+            id
+            name
+            email
+          }
+          tasks {
+            id
+            title
+            done
+          }
+        }
+      }
+    `;
+
+    return this.apollo
+      .watchQuery<{ getUsersWithTasks: UserList[] }>({
+        query: USERS_WITH_TASKS,
+        fetchPolicy: 'network-only'
+      })
+      .valueChanges
+      .pipe(map(result => result.data.getUsersWithTasks));
   }
 }
