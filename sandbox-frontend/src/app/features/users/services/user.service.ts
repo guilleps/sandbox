@@ -5,9 +5,7 @@ import { UserDTO } from '../dto/user.dto';
 import { UserList } from '../dto/user-list.dto';
 import { Apollo, gql } from 'apollo-angular';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UserService {
 
   constructor(private apollo: Apollo) { }

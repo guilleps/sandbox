@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { NzLayoutModule } from "ng-zorro-antd/layout";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NzLayoutModule],
+  standalone: false,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

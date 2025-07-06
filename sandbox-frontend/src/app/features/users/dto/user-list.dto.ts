@@ -1,4 +1,4 @@
-import { TaskDTO } from "./task.dto";
+import { TaskDTO } from "../../tasks/dto/task.dto";
 import { UserDTO } from "./user.dto";
 
 export interface UserList {

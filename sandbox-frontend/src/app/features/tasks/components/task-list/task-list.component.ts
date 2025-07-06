@@ -1,13 +1,10 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { TaskListDTO } from '../dto/task-list.dto';
-import { TaskService } from '../services/task.service';
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzListModule } from "ng-zorro-antd/list";
-import { NzTagModule } from "ng-zorro-antd/tag";
+import { TaskListDTO } from '../../dto/task-list.dto';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-task-list',
-  imports: [NzCardModule, NzListModule, NzTagModule],
+  standalone: false,
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css'
 })

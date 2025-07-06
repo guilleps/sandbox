@@ -1,15 +1,12 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { UserDTO } from '../dto/user.dto';
-import { UserService } from '../services/user.service';
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzListModule } from 'ng-zorro-antd/list';
-import { TaskListComponent } from "../task-list/task-list.component";
+import { UserDTO } from '../../dto/user.dto';
 import { Subscription } from 'rxjs';
-import { EventBusService } from '../event-bus.service';
+import { UserService } from '../../services/user.service';
+import { EventBusService } from '../../../../core/event-bus/event-bus.service';
 
 @Component({
   selector: 'app-user-list',
-  imports: [NzCardModule, NzListModule, TaskListComponent],
+  standalone: false,
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css'
 })

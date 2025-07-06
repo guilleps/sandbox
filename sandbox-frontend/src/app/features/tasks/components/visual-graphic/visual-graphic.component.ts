@@ -1,17 +1,14 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from "@angular/core";
+import { UserList } from "../../../users/dto/user-list.dto";
 import { Bar } from "@antv/g2plot";
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzListModule } from 'ng-zorro-antd/list';
-import { UserList } from '../dto/user-list.dto';
-import { UserService } from '../services/user.service';
-import { TaskComponent } from "../task/task.component";
-import { EventBusService } from '../event-bus.service';
-import { UserDTO } from '../dto/user.dto';
-import { Subscription } from 'rxjs';
+import { Subscription } from "rxjs";
+import { EventBusService } from "../../../../core/event-bus/event-bus.service";
+import { UserService } from "../../../users/services/user.service";
+import { UserDTO } from "../../../users/dto/user.dto";
 
 @Component({
   selector: 'app-visual-graphic',
-  imports: [NzCardModule, NzListModule, TaskComponent],
+  standalone: false,
   templateUrl: './visual-graphic.component.html',
   styleUrl: './visual-graphic.component.css'
 })

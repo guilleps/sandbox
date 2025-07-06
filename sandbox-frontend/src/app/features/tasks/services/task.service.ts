@@ -4,9 +4,7 @@ import { map, Observable } from 'rxjs';
 import { TaskDTO } from '../dto/task.dto';
 import { CreateTaskDTO } from '../dto/creat-task.dto';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class TaskService {
   constructor(private apollo: Apollo) { }
 

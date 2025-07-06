@@ -1,20 +1,16 @@
 import { Component } from '@angular/core';
-import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzFormModule } from 'ng-zorro-antd/form';
-import { NzSelectModule } from "ng-zorro-antd/select";
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { UserService } from '../services/user.service';
-import { UserList } from '../dto/user-list.dto';
-import { TaskService } from '../services/task.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TaskService } from '../../services/task.service';
+import { UserList } from '../../../users/dto/user-list.dto';
+import { UserService } from '../../../users/services/user.service';
 
 @Component({
-  selector: 'app-task',
-  imports: [NzButtonModule, NzCardModule, NzFormModule, ReactiveFormsModule, NzSelectModule],
-  templateUrl: './task.component.html',
-  styleUrl: './task.component.css'
+  selector: 'app-task-form',
+  standalone: false,
+  templateUrl: './task-form.component.html',
+  styleUrl: './task-form.component.css'
 })
-export class TaskComponent {
+export class TaskFormComponent {
   taskForm: FormGroup;
   users: UserList[] = [];
 

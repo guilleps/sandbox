@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { UserComponent } from './user/user.component';
+import { UserFormComponent } from './features/users/components/user-form/user-form.component';
 
 export const routes: Routes = [
     {
@@ -10,6 +10,6 @@ export const routes: Routes = [
     },
     {
         path: 'user-tasks',
-        component: UserComponent
+        component: UserFormComponent
     }
 ];
