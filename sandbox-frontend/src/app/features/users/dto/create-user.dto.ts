@@ -1,4 +1,4 @@
 export class CreateUserDTO {
-    name!: string;
-    email!: string;
+	name!: string;
+	email!: string;
 }

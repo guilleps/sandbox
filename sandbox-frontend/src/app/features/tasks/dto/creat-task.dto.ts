@@ -1,5 +1,5 @@
 export class CreateTaskDTO {
-    title!: string;
-    description?: string;
-    assignedToUserId!: string;
+	title!: string;
+	description?: string;
+	assignedToUserId!: string;
 }

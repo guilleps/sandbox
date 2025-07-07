@@ -2,30 +2,30 @@ import { Component } from '@angular/core';
 import { CreateUserDTO } from '../../dto/create-user.dto';
 import { UserService } from '../../services/user.service';
 import { EventBusService } from '../../../../core/event-bus/event-bus.service';
+import { UserDTO } from '../../dto/user.dto';
 
 @Component({
-  selector: 'app-user-form',
-  standalone: false,
-  templateUrl: './user-form.component.html',
-  styleUrl: './user-form.component.css'
+	selector: 'app-user-form',
+	standalone: false,
+	templateUrl: './user-form.component.html',
+	styleUrl: './user-form.component.css',
 })
 export class UserFormComponent {
-  form: CreateUserDTO = { name: '', email: '' };
-  created: any;
+	form: CreateUserDTO = { name: '', email: '' };
+	created!: UserDTO;
 
-  constructor(
-    private userService: UserService,
-    private eventBus: EventBusService
-  ) { }
+	constructor(
+		private userService: UserService,
+		private eventBus: EventBusService,
+	) {}
 
-  saveUser() {
-    this.userService.createUser(this.form).subscribe((user) => {
-      this.created = user;
-      this.form = { name: '', email: '' }
+	saveUser() {
+		this.userService.createUser(this.form).subscribe(user => {
+			this.created = user;
+			this.form = { name: '', email: '' };
 
-      this.eventBus.emit('userCreated', user)
-      console.log('[EMIT] Usuario creado:', user);
-    })
-  }
-
+			this.eventBus.emit('userCreated', user);
+			console.log('[EMIT] Usuario creado:', user);
+		});
+	}
 }

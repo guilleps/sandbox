@@ -1,0 +1,89 @@
+// @ts-check
+const eslint = require("@eslint/js");
+const tseslint = require("typescript-eslint");
+const angular = require("angular-eslint");
+const prettier = require("eslint-plugin-prettier");
+
+module.exports = tseslint.config(
+  {
+    files: ["**/*.ts"],
+    languageOptions: {
+      parserOptions: {
+        project: ["tsconfig.json"],
+        tsconfigRootDir: __dirname
+      }
+    },
+    plugins: {
+      prettier
+    },
+    extends: [
+      eslint.configs.recommended,
+      ...tseslint.configs.recommended,
+      ...tseslint.configs.stylistic,
+      ...angular.configs.tsRecommended,
+    ],
+    processor: angular.processInlineTemplates,
+    rules: {
+      "@angular-eslint/prefer-standalone": "off",
+      "@angular-eslint/prefer-inject": "off",
+      "@angular-eslint/use-component-view-encapsulation": "error",
+      "@angular-eslint/no-output-on-prefix": "off",
+      "@angular-eslint/directive-selector": [
+        "error",
+        {
+          type: "attribute",
+          prefix: "app",
+          style: "camelCase",
+        },
+      ],
+      "@angular-eslint/component-selector": [
+        "error",
+        {
+          type: "element",
+          prefix: "app",
+          style: "kebab-case",
+        },
+      ],
+      "@typescript-eslint/consistent-type-definitions": "error",
+      "@typescript-eslint/no-var-requires": "error",
+      "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          selector: "enum",
+          format: ["PascalCase"],
+        },
+      ],
+      "prettier/prettier": [
+        "error",
+        {
+          "arrowParens": "avoid",
+          "bracketSpacing": true,
+          "printWidth": 100,
+          "proseWrap": "preserve",
+          "quoteProps": "consistent",
+          "semi": true,
+          "singleQuote": true,
+          "tabWidth": 2,
+          "trailingComma": "all",
+          "useTabs": true,
+          "overrides": [
+            {
+              "files": "*.json",
+              "options": {
+                "tabWidth": 2
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ["**/*.html"],
+    extends: [
+      ...angular.configs.templateRecommended,
+      ...angular.configs.templateAccessibility,
+    ],
+    rules: {},
+  }
+);

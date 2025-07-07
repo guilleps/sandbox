@@ -1,5 +1,5 @@
 export class TaskDoneDTO {
-    id!: string;
-    title!: string;
-    done!: boolean;
+	id!: string;
+	title!: string;
+	done!: boolean;
 }
