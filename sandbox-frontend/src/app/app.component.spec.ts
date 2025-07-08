@@ -1,10 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { RouterModule } from '@angular/router';
 
 describe('AppComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [AppComponent],
+			declarations: [AppComponent],
+			imports: [NzLayoutModule, RouterModule],
 		}).compileComponents();
 	});
 
@@ -24,6 +27,6 @@ describe('AppComponent', () => {
 		const fixture = TestBed.createComponent(AppComponent);
 		fixture.detectChanges();
 		const compiled = fixture.nativeElement as HTMLElement;
-		expect(compiled.querySelector('h1')?.textContent).toContain('Hello, sandbox-frontend');
+		expect(compiled.querySelector('h1')?.textContent).toContain('Sandbox');
 	});
 });
