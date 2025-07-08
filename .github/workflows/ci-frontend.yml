@@ -5,12 +5,12 @@ on:
     branches: [ "main" ]
     paths:
       - 'sandbox-frontend/**'
-      - 'package.json'
+      - 'sandbox-frontend/package.json'
   pull_request:
     branches: [ "main" ]
     paths:
       - 'sandbox-frontend/**'
-      - 'package.json'
+      - 'sandbox-frontend/package.json'
 
 jobs:
   build:
