@@ -21,7 +21,7 @@ export class TaskChartComponent implements OnInit, OnDestroy {
 		private eventBus: EventBusService,
 		private userService: UserService,
 		private cdRef: ChangeDetectorRef,
-	) { }
+	) {}
 
 	ngOnInit(): void {
 		this.loadUsers();
