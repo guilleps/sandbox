@@ -8,8 +8,21 @@ export class UserRepository {
     }
 
     async create(user: Partial<User>): Promise<User> { // partial para ignorar id
-        return this.repo.create(user as User);
+        return await this.repo.create(user as User);
     }
+
+    async update(userId: string, user: Partial<User>): Promise<User> {
+        const userFounded = await this.repo.findById(userId);
+
+        if (!userFounded) throw new Error(`User with ID[${userId}] not founded`);
+
+        const updatedUser: User = {
+            ...userFounded,
+            ...user, // solo sobrescribe los campos definidos
+        };
+
+        return this.repo.update(updatedUser);
+    };
 
     async findByEmail(email: string): Promise<User | null> {
         const users = await this.repo.whereEqualTo('email', email).find();

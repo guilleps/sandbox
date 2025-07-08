@@ -6,6 +6,7 @@ import { Task } from "../../tasks/models/Task";
 import { TaskRepository } from "../../tasks/repositories/task.repository";
 import { DeleteUser } from "../dto/delete-user.dto";
 import { UserByEmail } from "../dto/user-by-email.dto";
+import { UpdateUser } from "../dto/update-user.dto";
 
 @ObjectType()
 class UserWithTasks {
@@ -33,6 +34,11 @@ export class UserResolver {
     @Mutation(() => User)
     async createUser(@Arg("data") data: CreateUser): Promise<User> {
         return this.userRepo.create(data);
+    }
+
+    @Mutation(() => User)
+    async updateUser(@Arg("userId") userId: string, @Arg("data") data: UpdateUser): Promise<User> {
+        return this.userRepo.update(userId, data);
     }
 
     @Mutation(() => Boolean)
