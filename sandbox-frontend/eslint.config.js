@@ -53,29 +53,7 @@ module.exports = tseslint.config(
           format: ["PascalCase"],
         },
       ],
-      "prettier/prettier": [
-        "error",
-        {
-          "arrowParens": "avoid",
-          "bracketSpacing": true,
-          "printWidth": 100,
-          "proseWrap": "preserve",
-          "quoteProps": "consistent",
-          "semi": true,
-          "singleQuote": true,
-          "tabWidth": 2,
-          "trailingComma": "all",
-          "useTabs": true,
-          "overrides": [
-            {
-              "files": "*.json",
-              "options": {
-                "tabWidth": 2
-              },
-            },
-          ],
-        },
-      ],
+      "prettier/prettier": "error",
     },
   },
   {
