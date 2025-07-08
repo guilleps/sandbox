@@ -1,0 +1,52 @@
+name: Frontend CI
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'sandbox-frontend/**'
+      - 'package.json'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'sandbox-frontend/**'
+      - 'package.json'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.11.1]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    defaults:
+      run:
+        working-directory: sandbox-frontend
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+      
+    - name: Install dependencies
+      # 1. elimina carpeta node_modules
+      # 3. instala dependencias desde package-lock.json
+      # 4. retorna un erorr si no coincide package-lock.json y package.json
+      run: npm ci
+
+    - name: Lint code
+      run: npm run lint:fix
+      
+    - name: Run tests 
+      # --watch=false no recarge nuevamente al observar nuevos cambios
+      # --browsers=ChromeHeadless no abre el navegador
+      run: npm test -- --watch=false --browsers=ChromeHeadless
+
+    - name: Build app
+      run: npm run build
