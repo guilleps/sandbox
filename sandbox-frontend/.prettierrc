@@ -6,7 +6,7 @@
     "quoteProps": "consistent",
     "semi": true,
     "singleQuote": true,
-    "endOfLine": "lf",
+    "endOfLine": "auto",
     "tabWidth": 2,
     "trailingComma": "all",
     "useTabs": true,

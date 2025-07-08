@@ -13,6 +13,9 @@ module.exports = tseslint.config(
         tsconfigRootDir: __dirname
       }
     },
+    ignores: [
+      "node_modules/"
+    ],
     plugins: {
       prettier
     },
@@ -53,7 +56,30 @@ module.exports = tseslint.config(
           format: ["PascalCase"],
         },
       ],
-      "prettier/prettier": "error",
+      "prettier/prettier": [
+        "error",
+        {
+          "arrowParens": "avoid",
+          "bracketSpacing": true,
+          "printWidth": 100,
+          "proseWrap": "preserve",
+          "quoteProps": "consistent",
+          "semi": true,
+          "singleQuote": true,
+          "endOfLine": "auto",
+          "tabWidth": 2,
+          "trailingComma": "all",
+          "useTabs": true,
+          "overrides": [
+            {
+              "files": "*.json",
+              "options": {
+                "tabWidth": 2
+              }
+            }
+          ]
+        }
+      ],
     },
   },
   {
