@@ -24,7 +24,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: sandbox-backend
+        working-directory: sandbox-backend/functions
 
     steps:
     - uses: actions/checkout@v4
