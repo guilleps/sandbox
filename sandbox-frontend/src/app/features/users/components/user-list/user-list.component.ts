@@ -24,7 +24,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.loadUsers();
 
-		const sub = this.eventBus.on<UserDTO>('userCreated').subscribe(nuevoUsuario => {
+		const sub = this.eventBus.on('userCreated').subscribe(nuevoUsuario => {
 			console.log('[ON] Evento userCreated recibido en USER-LIST:', nuevoUsuario);
 			this.loadUsers();
 		});

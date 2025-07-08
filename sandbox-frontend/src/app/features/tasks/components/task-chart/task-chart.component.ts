@@ -4,7 +4,6 @@ import { Bar } from '@antv/g2plot';
 import { Subscription } from 'rxjs';
 import { EventBusService } from '../../../../core/event-bus/event-bus.service';
 import { UserService } from '../../../users/services/user.service';
-import { UserDTO } from '../../../users/dto/user.dto';
 
 @Component({
 	selector: 'app-task-chart',
@@ -26,8 +25,8 @@ export class TaskChartComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.loadUsers();
 
-		const sub = this.eventBus.on<UserDTO>('userCreated').subscribe(nuevoUsuario => {
-			console.log('[ON] Evento userCreated recibido en VISUAL:', nuevoUsuario);
+		const sub = this.eventBus.on('userCreated').subscribe(() => {
+			// console.log('[ON] Evento userCreated recibido en VISUAL:', nuevoUsuario);
 			this.loadUsers();
 		});
 		this.subscriptions.add(sub);
@@ -82,7 +81,14 @@ export class TaskChartComponent implements OnInit, OnDestroy {
 					textAlign: 'center',
 					fontSize: 18,
 				},
-				label: { position: 'middle', style: { fill: 'black' } },
+				label: {
+					position: 'middle',
+					style: {
+						fill: 'black',
+					},
+					content: datum => (datum['count'] ? String(datum['count']) : ''),
+					layout: [{ type: 'hide-overlap' }],
+				},
 			});
 			this.barPlot.render();
 		} else {
