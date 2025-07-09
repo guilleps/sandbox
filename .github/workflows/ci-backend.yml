@@ -50,6 +50,6 @@ jobs:
       uses: w9jds/firebase-action@master
       with:
         args: deploy --only functions,firestore
-        PROJECT_PATH: ./sandbox-backend
+        project_path: ./sandbox-backend
       env:
         GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
