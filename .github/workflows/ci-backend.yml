@@ -48,6 +48,6 @@ jobs:
     - name: Auth & Deploy Fire App
       uses: w9jds/firebase-action@master
       with:
-        tools-version: 13.0.2
-        firebase_token: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-    - run: firebase deploy --only functions,firestore
+        args: deploy --only functions,firestore
+      env:
+        GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
