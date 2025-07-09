@@ -47,9 +47,12 @@ jobs:
       run: npm run build
 
     - name: Auth & Deploy Fire App
-      uses: w9jds/firebase-action@master
+      uses: google-github-actions/firebase-deploy@v0
       with:
-        args: deploy --only functions,firestore
-        project_path: ./sandbox-backend
+        project_id: sandbox-ffdff
+        firebase_service_account: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        channel_id: live
+        deploy_target: functions,firestore
       env:
-        GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        FIREBASE_CLI_PREVIEWS: hostingchannels
+        WORKING_DIR: sandbox-backend
