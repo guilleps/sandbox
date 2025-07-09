@@ -10,6 +10,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:no-browser": "ng test --browsers=ChromeHeadless",
     "lint": "eslint src/**/*.{ts,html}",
     "lint:fix": "eslint src/**/*.{ts,html} --fix"
   },
@@ -49,4 +50,5 @@
     "typescript": "~5.7.2",
     "typescript-eslint": "8.34.1"
   }
+
 }

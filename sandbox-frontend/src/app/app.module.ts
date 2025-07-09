@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
+import { AppComponent } from '@/app/app.component';
 import { BrowserModule } from '@angular/platform-browser';
-import { UsersModule } from './features/users/users.module';
-import { TasksModule } from './features/tasks/tasks.module';
+import { UsersModule } from '@/app/features/users/users.module';
+import { TasksModule } from '@/app/features/tasks/tasks.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
@@ -17,7 +17,7 @@ import { registerLocaleData } from '@angular/common';
 import es from '@angular/common/locales/es';
 import { FormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { environment } from '../environments/environment.development';
+import { environment } from '@/environments/environment';
 
 registerLocaleData(es);
 
