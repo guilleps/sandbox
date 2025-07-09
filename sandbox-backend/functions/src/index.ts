@@ -25,9 +25,17 @@ async function startServer() {
     const server = new ApolloServer({ schema, playground: true }); // configura los schemas y resolvers a usar en apollo
 
     await server.start();
-    server.applyMiddleware({ app, path: '/', cors: true }); // exponemos endpoint a la raiz del server
+    server.applyMiddleware({
+        app,
+        path: '/',
+        cors: {
+            origin: 'https://sandbox-ffdff.firebaseapp.com',
+            methods: ['GET', 'POST', 'OPTIONS'],
+            allowedHeaders: ['Content-Type', 'Authorization'],
+        },
+    }); // exponemos endpoint a la raiz del server
 };
 
 startServer().catch((error) => {
-	console.error("Error starting Apollo Server:", error);
+    console.error("Error starting Apollo Server:", error);
 });
