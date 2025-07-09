@@ -7,7 +7,7 @@ export class TaskRepository {
         return getRepository(Task); // solo cuando se necesita
     }
 
-    async create(task: Partial<Task>): Promise<Task> { // partial para ignorar id
+    create(task: Partial<Task>): Promise<Task> { // partial para ignorar id
         return this.repo.create(task as Task);
     }
 

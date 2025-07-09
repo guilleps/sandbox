@@ -7,8 +7,8 @@ export class UserRepository {
         return getRepository(User); // solo cuando se necesita
     }
 
-    async create(user: Partial<User>): Promise<User> { // partial para ignorar id
-        return await this.repo.create(user as User);
+    create(user: Partial<User>): Promise<User> { // partial para ignorar id
+        return this.repo.create(user as User);
     }
 
     async update(userId: string, user: Partial<User>): Promise<User> {
@@ -29,8 +29,8 @@ export class UserRepository {
         return users[0] || null;
     }
 
-    async getAllUsers(): Promise<User[]> {
-        return await this.repo.find();
+    getAllUsers(): Promise<User[]> {
+        return this.repo.find();
     }
 
     async delete(id: string): Promise<string> {

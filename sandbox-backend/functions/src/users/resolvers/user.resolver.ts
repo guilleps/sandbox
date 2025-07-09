@@ -22,22 +22,22 @@ export class UserResolver {
     private readonly userRepo = new UserRepository();
 
     @Query(() => User, { nullable: true })
-    async userByEmail(@Arg("data") data: UserByEmail): Promise<User | null> {
+    userByEmail(@Arg("data") data: UserByEmail): Promise<User | null> {
         return this.userRepo.findByEmail(data.email);
     }
 
     @Query(() => [User])
-    async getAllUsers(): Promise<User[]> {
+    getAllUsers(): Promise<User[]> {
         return this.userRepo.getAllUsers();
     }
 
     @Mutation(() => User)
-    async createUser(@Arg("data") data: CreateUser): Promise<User> {
+    createUser(@Arg("data") data: CreateUser): Promise<User> {
         return this.userRepo.create(data);
     }
 
     @Mutation(() => User)
-    async updateUser(@Arg("userId") userId: string, @Arg("data") data: UpdateUser): Promise<User> {
+    updateUser(@Arg("userId") userId: string, @Arg("data") data: UpdateUser): Promise<User> {
         return this.userRepo.update(userId, data);
     }
 

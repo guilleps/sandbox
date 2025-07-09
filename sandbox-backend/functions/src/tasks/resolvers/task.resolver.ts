@@ -10,22 +10,22 @@ export class TaskResolver {
     private readonly taskRepo = new TaskRepository();
 
     @Query(() => [Task])
-    async taskByUser(@Arg("userId") userId: string): Promise<Task[]> {
+    taskByUser(@Arg("userId") userId: string): Promise<Task[]> {
         return this.taskRepo["repo"].whereEqualTo("assignedToUserId", userId).find();
     }
 
     @Mutation(() => Task)
-    async createTask(@Arg("data") data: CreateTask): Promise<Task> {
+    createTask(@Arg("data") data: CreateTask): Promise<Task> {
       return this.taskRepo.create(data);
     }
   
     @Mutation(() => Task)
-    async markTaskAsDone(@Arg("data") data: MarkTaskAsDone): Promise<Task> {
+    markTaskAsDone(@Arg("data") data: MarkTaskAsDone): Promise<Task> {
       return this.taskRepo.markDone(data.taskId, data.done);
     }
   
     @Mutation(() => String)
-    async deleteTask(@Arg("data") data: DeleteTask): Promise<string> {
+    deleteTask(@Arg("data") data: DeleteTask): Promise<string> {
       return this.taskRepo.delete(data.taskId);
     }
 }

@@ -19,7 +19,7 @@ export const graphql = functions.https.onRequest(app);
 
 async function startServer() {
     const schema = await buildSchema({
-        resolvers: [UserResolver, TaskResolver]
+        resolvers: [UserResolver, TaskResolver],
     })
 
     const server = new ApolloServer({ schema, playground: true }); // configura los schemas y resolvers a usar en apollo
