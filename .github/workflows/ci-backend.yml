@@ -44,3 +44,13 @@ jobs:
       
     - name: Build application/backend 
       run: npm run build
+
+    - name: Auth Fire Account
+      uses: w9jds/firebase-action@master
+      with:
+        args: deploy --only hosting
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+      
+    - name: Deploy app 
+      run: npm run deploy
