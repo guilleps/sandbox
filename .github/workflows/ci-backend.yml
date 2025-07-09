@@ -45,10 +45,14 @@ jobs:
       working-directory: sandbox-backend/functions
       run: npm run build
 
-    - name: Auth & Deploy Fire App
-      uses: w9jds/firebase-action@master
-      with:
-        working-directory: sandbox-backend
-        args: deploy --only functions,firestore
+    - name: Install Firebase CLI
+      run: npm install -g firebase-tools
+
+    - name: Authenticate & Deploy Firebase App
       env:
-        GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+      run: |
+        echo "$FIREBASE_SERVICE_ACCOUNT" > ${HOME}/gcp-key.json
+        export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/gcp-key.json
+        cd sandbox-backend
+        firebase deploy --only functions,firestore --project sandbox-ffdff
