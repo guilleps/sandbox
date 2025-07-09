@@ -55,4 +55,4 @@ jobs:
         echo "$FIREBASE_SERVICE_ACCOUNT" > ${HOME}/gcp-key.json
         export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/gcp-key.json
         cd sandbox-backend
-        firebase deploy --only functions,firestore --project sandbox-ffdff
+        firebase deploy --only functions,firestore --project sandbox-ffdff --force
