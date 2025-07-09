@@ -45,12 +45,9 @@ jobs:
     - name: Build application/backend 
       run: npm run build
 
-    - name: Auth Fire Account
+    - name: Auth & Deploy Fire App
       uses: w9jds/firebase-action@master
       with:
-        args: deploy --only hosting
+        args: deploy --only functions,firestore
       env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-      
-    - name: Deploy app 
-      run: npm run deploy
+        GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
