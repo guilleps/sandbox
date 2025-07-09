@@ -49,7 +49,7 @@ jobs:
     - name: Auth & Deploy Fire App
       uses: w9jds/firebase-action@master
       with:
-        working-directory: sandbox-backend
         args: deploy --only functions,firestore
+        entryPoint: sandbox-backend
       env:
         GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
