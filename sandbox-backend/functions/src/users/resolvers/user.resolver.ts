@@ -17,36 +17,131 @@ class UserWithTasks {
     tasks!: Task[];
 }
 
+/**
+ * Actua como controller, expone las operaciones(query & mutation) del sistema
+ * Usa UserRepository para acceder a la capa de datos con Firestore(FireORM)
+ */
 @Resolver(() => User)
 export class UserResolver {
     private readonly userRepo = new UserRepository();
 
+    /**
+     * Consulta para buscar un usuario por su correo electrónico
+     *
+     * @param {UserByEmail} data - DTO con el campo email
+     * @returns {Promise<User | null>} Usuario encontrado o null
+     *
+     * @example
+     * query {
+     *   userByEmail(data: { email: "jose@example.com" }) {
+     *     id
+     *     name
+     *     email
+     *   }
+     * }
+     */
     @Query(() => User, { nullable: true })
     userByEmail(@Arg("data") data: UserByEmail): Promise<User | null> {
         return this.userRepo.findByEmail(data.email);
     }
 
+    /**
+     * Consulta para obtener todos los usuarios registrados
+     *
+     * @returns {Promise<User[]>} Lista de usuarios
+     *
+     * @example
+     * query {
+     *   getAllUsers {
+     *     id
+     *     name
+     *     email
+     *   }
+     * }
+     */
     @Query(() => [User])
     getAllUsers(): Promise<User[]> {
         return this.userRepo.getAllUsers();
     }
 
+    /**
+     * Mutación para crear un nuevo usuario
+     *
+     * @param {CreateUser} data - DTO con datos del nuevo usuario
+     * @returns {Promise<User>} Usuario creado
+     *
+     * @example
+     * mutation {
+     *   createUser(data: { name: "Laura", email: "laura@gmail.com" }) {
+     *     id
+     *     name
+     *     email
+     *   }
+     * }
+     */
     @Mutation(() => User)
     createUser(@Arg("data") data: CreateUser): Promise<User> {
         return this.userRepo.create(data);
     }
 
+    /**
+     * Mutación para actualizar los datos de un usuario
+     *
+     * @param {string} userId - ID del usuario a actualizar
+     * @param {UpdateUser} data - DTO con los nuevos campos
+     * @returns {Promise<User>} Usuario actualizado
+     *
+     * @example
+     * mutation {
+     *   updateUser(userId: "232", data: { name: "Nuevo nombre" }) {
+     *     id
+     *     name
+     *     email
+     *   }
+     * }
+     */
     @Mutation(() => User)
     updateUser(@Arg("userId") userId: string, @Arg("data") data: UpdateUser): Promise<User> {
         return this.userRepo.update(userId, data);
     }
 
+    /**
+     * Mutación para eliminar un usuario.
+     *
+     * @param {DeleteUser} data - DTO con el ID del usuario a eliminar
+     * @returns {Promise<Boolean>} true si se eliminó correctamente
+     *
+     * @example
+     * mutation {
+     *   delete(data: { id: "abc123" })
+     * }
+     */
     @Mutation(() => Boolean)
     async delete(@Arg("data") data: DeleteUser): Promise<Boolean> {
         await this.userRepo.delete(data.id);
         return true;
     }
 
+    /**
+     * Consulta que devuelve una lista de usuarios con sus tareas asociadas
+     * Útil para vistas de dashboard o seguimiento de tareas por usuario
+     *
+     * @returns {Promise<UserWithTasks[]>} Lista de usuarios junto a sus tareas
+     *
+     * @example
+     * query {
+     *   getUsersWithTasks {
+     *     user {
+     *       name
+     *       email
+     *     }
+     *     tasks {
+     *       title
+     *       done
+     *     }
+     *   }
+     * }
+     */
     @Query(() => [UserWithTasks])
     async getUsersWithTasks(): Promise<UserWithTasks[]> {
         const users = await this.userRepo.getAllUsers();
@@ -54,7 +149,9 @@ export class UserResolver {
 
         const userTasks = await Promise.all(
             users.map(async (user) => {
-                const tasks = await taskRepo["repo"].whereEqualTo("assignedToUserId", user.id).find();
+                const tasks = await taskRepo["repo"]
+                    .whereEqualTo("assignedToUserId", user.id)
+                    .find();
                 return { user, tasks };
             })
         );
@@ -62,26 +159,3 @@ export class UserResolver {
         return userTasks;
     }
 }
-
-// import { User } from "../models/User";
-// import { UserRepository } from "../repositories/user.repository";
-// import { CreateUser, DeleteUserById, GetUserByEmail } from "../graphql/dto/user.dto";
-
-// const userRepo = new UserRepository();
-
-// // lo que realmente debe hacer una query o mutation
-// export const userResolvers = {
-//     Query: {
-//         userByEmail: async (_parent: unknown, args: GetUserByEmail): Promise<User | null> => {
-//             return userRepo.findByEmail(args.email)
-//         }
-//     },
-//     Mutation: {
-//         createUser: async (_parent: unknown, args: CreateUser): Promise<User> => {
-//             return userRepo.create(args);
-//         },
-//         delete: async (_parent: unknown, args: DeleteUserById): Promise<string> => {
-//             return userRepo.delete(args.id);
-//         }
-//     },
-// };
