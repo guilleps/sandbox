@@ -17,7 +17,7 @@ import { registerLocaleData } from '@angular/common';
 import es from '@angular/common/locales/es';
 import { FormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { environment } from '@/environments/environment.development';
+import { environment } from '@/environments/environment';
 
 registerLocaleData(es);
 
