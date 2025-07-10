@@ -1,26 +1,24 @@
 <div class="two-column-layout">
     <div class="column-left">
         <nz-card nzTitle="Nuevo usuario" class="layout-user-form">
-            <form nz-form (ngSubmit)="saveUser()" class="user-form" [nzLayout]="'vertical'">
+            <form [formGroup]="form" nz-form (ngSubmit)="saveUser()" class="user-form" nzLayout="vertical">
                 <nz-form-item>
                     <nz-form-label [nzRequired]="true" nzFor="name">Nombre</nz-form-label>
                     <nz-form-control>
-                        <input nz-input [(ngModel)]="form.name" name="name" id="name" placeholder="Ingresa tu nombre"
-                            required />
+                        <input nz-input formControlName="name" id="name" placeholder="Ingresa tu nombre" />
                     </nz-form-control>
                 </nz-form-item>
 
                 <nz-form-item>
                     <nz-form-label [nzRequired]="true" nzFor="email">Correo</nz-form-label>
                     <nz-form-control>
-                        <input nz-input [(ngModel)]="form.email" name="email" id="email"
-                            placeholder="correo@ejemplo.com" type="email" required />
+                        <input nz-input formControlName="email" id="email" type="email" placeholder="correo@ejemplo.com" />
                     </nz-form-control>
                 </nz-form-item>
 
                 <nz-form-item>
                     <nz-form-control>
-                        <button nz-button nzType="primary" [disabled]="!form.name || !form.email" htmlType="submit" nzShape="round">
+                        <button nz-button nzType="primary" [disabled]="form.valid" htmlType="submit" nzShape="round">
                             <nz-icon nzType="plus" nzTheme="outline" />
                             Crear usuario
                         </button>

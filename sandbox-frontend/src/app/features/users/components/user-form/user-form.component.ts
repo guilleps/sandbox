@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { CreateUserDTO } from '../../dto/create-user.dto';
 import { UserDTO } from '../../dto/user.dto';
 import { UserService } from '../../services/user.service';
 import { EventBusService } from '@/app/core/event-bus/event-bus.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
 	selector: 'app-user-form',
@@ -11,18 +11,26 @@ import { EventBusService } from '@/app/core/event-bus/event-bus.service';
 	styleUrl: './user-form.component.css',
 })
 export class UserFormComponent {
-	form: CreateUserDTO = { name: '', email: '' };
+	form!: FormGroup;
 	created!: UserDTO;
 
 	constructor(
+		private fb: FormBuilder,
 		private userService: UserService,
 		private eventBus: EventBusService,
-	) {}
+	) {
+		this.form = this.fb.group({
+			name: ['', [Validators.required]],
+			email: ['', [Validators.required, Validators.email]],
+		});
+	}
 
 	saveUser() {
-		this.userService.createUser(this.form).subscribe(user => {
+		if (this.form.invalid) return;
+
+		this.userService.createUser(this.form.value).subscribe(user => {
 			this.created = user;
-			this.form = { name: '', email: '' };
+			this.form.reset();
 
 			this.eventBus.emit('userCreated', user);
 			console.log('[EMIT] Usuario creado:', user);
