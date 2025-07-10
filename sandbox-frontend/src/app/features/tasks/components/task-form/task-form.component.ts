@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CreateTaskDTO } from '../../dto/creat-task.dto';
 import { TaskService } from '../../services/task.service';
-import { UserList } from '@/app/features/users/dto/user-list.dto';
-import { UserService } from '@/app/features/users/services/user.service';
+import { UserList } from '@app/features/users/dto/user-list.dto';
+import { UserService } from '@app/features/users/services/user.service';
 
 @Component({
 	selector: 'app-task-form',

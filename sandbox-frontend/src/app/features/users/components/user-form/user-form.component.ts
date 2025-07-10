@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { UserDTO } from '../../dto/user.dto';
 import { UserService } from '../../services/user.service';
-import { EventBusService } from '@/app/core/event-bus/event-bus.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EventBusService } from '@app/core/event-bus/event-bus.service';
 
 @Component({
 	selector: 'app-user-form',

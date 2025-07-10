@@ -2,8 +2,8 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { UserList } from '../../../users/dto/user-list.dto';
 import { Bar } from '@antv/g2plot';
 import { Subscription } from 'rxjs';
-import { EventBusService } from '@/app/core/event-bus/event-bus.service';
-import { UserService } from '@/app/features/users/services/user.service';
+import { EventBusService } from '@app/core/event-bus/event-bus.service';
+import { UserService } from '@app/features/users/services/user.service';
 
 @Component({
 	selector: 'app-task-chart',

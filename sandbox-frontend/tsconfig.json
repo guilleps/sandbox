@@ -21,7 +21,6 @@
 		"allowSyntheticDefaultImports": true,
 		"baseUrl": "./src",
 		"paths": {
-			"@/*": ["*"],
 			"@app/*": ["app/*"],
 			"@environments/*": ["environments/*"],
 			"@core/*": ["app/core/*"],

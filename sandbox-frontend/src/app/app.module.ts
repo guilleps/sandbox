@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { AppComponent } from '@/app/app.component';
 import { BrowserModule } from '@angular/platform-browser';
 // import { UsersModule } from '@/app/features/users/users.module';
 // import { TasksModule } from '@/app/features/tasks/tasks.module';
@@ -17,7 +16,8 @@ import { registerLocaleData } from '@angular/common';
 import es from '@angular/common/locales/es';
 import { FormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { environment } from '@/environments/environment';
+import { AppComponent } from '@app/app.component';
+import { environment } from '@environments/environment.development';
 
 registerLocaleData(es);
 

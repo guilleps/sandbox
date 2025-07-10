@@ -49,7 +49,7 @@ export class UserService {
 	 */
 	getAllUsers(): Observable<UserDTO[]> {
 		const GET_ALL_USERS = gql`
-			query {
+			query getAllUsers {
 				getAllUsers {
 					id
 					name
@@ -76,7 +76,7 @@ export class UserService {
 	 */
 	getAllUsersAndTasks(): Observable<UserList[]> {
 		const USERS_WITH_TASKS = gql`
-			query {
+			query getUsersWithTasks {
 				getUsersWithTasks {
 					user {
 						id

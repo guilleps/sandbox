@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { UserDTO } from '../../dto/user.dto';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../services/user.service';
-import { EventBusService } from '@/app/core/event-bus/event-bus.service';
+import { EventBusService } from '@app/core/event-bus/event-bus.service';
 
 @Component({
 	selector: 'app-user-list',
