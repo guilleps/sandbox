@@ -1,0 +1,21 @@
+{
+  "name": "capacitacion-instrategy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky",
+    "lint": "npm run lint:backend npm run lint:frontend",
+    "lint:backend": "nvm use $(cat sandbox-backend/functions/.nvmrc) && cd sandbox-backend/functions && npm run lint",
+    "lint:frontend": "nvm use $(cat sandbox-frontend/.nvmrc) && cd sandbox-frontend && npm run lint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "commitlint": "^19.8.1",
+    "husky": "^9.1.7"
+  }
+}
