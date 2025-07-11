@@ -20,9 +20,9 @@ export class UserRepository {
      * @returns {Promise<User>} El usuario creado con id asignado.
      *
      * @example
-     * userRepo.create({ name: "Enri", email: "enrikeke@gmail.com" });
+     * userRepo.createUser({ name: "Enri", email: "enrikeke@gmail.com" });
      */
-    create(user: Partial<User>): Promise<User> {
+    createUser(user: Partial<User>): Promise<User> {
         return this.repo.create(user as User);
     }
 
@@ -34,9 +34,9 @@ export class UserRepository {
      * @returns {Promise<User>} Usuario actualizado
      * @throws Error si el usuario no existe.
      *
-     * @example userRepo.update("abc123", { name: "Barbara" });
+     * @example userRepo.updateUserById("abc123", { name: "Barbara" });
      */
-    async update(userId: string, user: Partial<User>): Promise<User> {
+    async updateUserById(userId: string, user: Partial<User>): Promise<User> {
         const userFounded = await this.repo.findById(userId);
 
         if (!userFounded) throw new Error(`User with ID[${userId}] not founded`);
@@ -50,14 +50,27 @@ export class UserRepository {
     }
 
     /**
+     * Busca un usuario por su id.
+     *
+     * @param {string} id - ID del usuario.
+     * @returns {Promise<User | null>} El usuario encontrado o null si no existe
+     *
+     * @example const userFounded = await userRepo.findUserById("1223A");
+     */
+    async findUserById(userId: string): Promise<User | null> {
+        const users = await this.repo.whereEqualTo('id', userId).find();
+        return users[0] || null;
+    }
+
+    /**
      * Busca un usuario por su correo electrónico.
      *
      * @param {string} email - Correo electrónico del usuario.
      * @returns {Promise<User | null>} El usuario encontrado o null si no existe
      *
-     * @example const userFounded = await userRepo.findByEmail("louis@gmail.com");
+     * @example const userFounded = await userRepo.findUserByEmail("louis@gmail.com");
      */
-    async findByEmail(email: string): Promise<User | null> {
+    async findUserByEmail(email: string): Promise<User | null> {
         const users = await this.repo.whereEqualTo('email', email).find();
         return users[0] || null;
     }
@@ -79,9 +92,9 @@ export class UserRepository {
      * @param {string} id - ID del usuario a eliminar
      * @returns {Promise<string>} Mensaje de confirmación
      *
-     * @example await userRepo.delete("abc123"); // → "User with id={abc123} has deleted"
+     * @example await userRepo.deleteUserById("abc123"); // → "User with id={abc123} has deleted"
      */
-    async delete(id: string): Promise<string> {
+    async deleteUserById(id: string): Promise<string> {
         await this.repo.delete(id);
         return `User with id={${id}} has deleted`;
     }

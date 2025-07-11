@@ -9,9 +9,9 @@ export class TaskRepository {
 	 * Metodo getter(privado) que retorna una instancia del repositorio tipado de FireORM para Task
 	 * Se activa la carga perezosa (solo cuando se necesita)
 	 */
-    private get repo(): BaseFirestoreRepository<Task> {
-        return getRepository(Task);
-    }
+	private get taskCollection(): BaseFirestoreRepository<Task> {
+		return getRepository(Task);
+	}
 
 	/**
 	 * Crea una nueva tarea
@@ -19,11 +19,11 @@ export class TaskRepository {
 	 * @param {Partial<Task>} task - Objeto parcial de tipo Task (evitamos ID debido a su generación automatica)
 	 * @returns {Promise<Task>} Respuesta/retorno de tipo Promesa que resuelve con la tarea creada
 	 *
-	 * @example taskRepository.create({ title: 'Leer libro', done: false });
+	 * @example taskRepository.createTask({ title: 'Leer libro', done: false });
 	 */
-    create(task: Partial<Task>): Promise<Task> {
-        return this.repo.create(task as Task);
-    }
+	createTask(task: Partial<Task>): Promise<Task> {
+		return this.taskCollection.create(task as Task);
+	}
 
 	/**
 	 * Marca una tarea como completada/incompleta
@@ -32,13 +32,13 @@ export class TaskRepository {
 	 * @param {boolean} done - Estado de la tarea (true para completada, false para pendiente)
 	 * @returns {Promise<Task>} Respuesta/retorno de tipo Promesa que resuelve con la tarea actualizada
 	 *
-	 * @example taskRepository.markDone('412', true);
+	 * @example taskRepository.updateTaskStatusById('412', true);
 	 */
-    async markDone(taskId: string, done: boolean): Promise<Task> {
-        const task = await this.repo.findById(taskId);
-        task.done = done;
-        return this.repo.update(task);
-    }
+	async updateTaskStatusById(taskId: string, done: boolean): Promise<Task> {
+		const task = await this.taskCollection.findById(taskId);
+		task.done = done;
+		return this.taskCollection.update(task);
+	}
 
 	/**
 	 * Elimina una tarea segun su ID
@@ -46,10 +46,23 @@ export class TaskRepository {
 	 * @param {string} taskId - ID de la tarea a eliminar.
 	 * @returns {Promise<string>} Respuesta/retorno de tipo Promesa que resuelve con un mensaje de confirmación
 	 *
-	 * @example taskRepository.delete('abc123');
+	 * @example taskRepository.deleteTaskById('abc123');
 	 */
-    async delete(taskId: string): Promise<string> {
-        await this.repo.delete(taskId);
-        return `Task with id={${taskId}} has deleted`;
-    }
+	async deleteTaskById(taskId: string): Promise<string> {
+		await this.taskCollection.delete(taskId);
+		return `Task with id={${taskId}} has deleted`;
+	}
+
+	/**
+	 * Busca un tareas por el userid.
+	 *
+	 * @param {string} userId - ID del usuario.
+	 * @returns {Promise<Task>} Retorna una arreglo de todas las listas del usuario
+	 *
+	 * @example const userFounded = await taskRepo.findTasksByUserId("1223A");
+	 */
+	async findTasksByUserId(userId: string): Promise<Task[]> {
+		const tasks = await this.taskCollection.whereEqualTo("assignedToUserId", userId).find();
+		return tasks;
+	}
 }

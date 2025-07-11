@@ -11,7 +11,7 @@ import { DeleteTask } from "../dto/delete-task.dto";
  */
 @Resolver(() => Task)
 export class TaskResolver {
-	private readonly taskRepo = new TaskRepository();
+  private readonly taskRepo = new TaskRepository();
 
   /**
    * Consulta las tareas asignadas a un usuario específico
@@ -29,8 +29,8 @@ export class TaskResolver {
    * }
    */
   @Query(() => [Task])
-  taskByUser(@Arg("userId") userId: string): Promise<Task[]> {
-    return this.taskRepo["repo"].whereEqualTo("assignedToUserId", userId).find();
+  findTasksByUserId(@Arg("userId") userId: string): Promise<Task[]> {
+    return this.taskRepo.findTasksByUserId(userId);
   }
 
   /**
@@ -49,7 +49,7 @@ export class TaskResolver {
    */
   @Mutation(() => Task)
   createTask(@Arg("data") data: CreateTask): Promise<Task> {
-    return this.taskRepo.create(data);
+    return this.taskRepo.createTask(data);
   }
 
   /**
@@ -67,8 +67,8 @@ export class TaskResolver {
    * }
    */
   @Mutation(() => Task)
-  markTaskAsDone(@Arg("data") data: MarkTaskAsDone): Promise<Task> {
-    return this.taskRepo.markDone(data.taskId, data.done);
+  updateTaskStatusById(@Arg("data") data: MarkTaskAsDone): Promise<Task> {
+    return this.taskRepo.updateTaskStatusById(data.taskId, data.done);
   }
 
   /**
@@ -79,11 +79,11 @@ export class TaskResolver {
    *
    * @example
    * mutation {
-   *   deleteTask(data: { taskId: "abc123" })
+   *   deleteTaskById(data: { taskId: "abc123" })
    * }
    */
   @Mutation(() => String)
-  deleteTask(@Arg("data") data: DeleteTask): Promise<string> {
-    return this.taskRepo.delete(data.taskId);
+  deleteTaskById(@Arg("data") data: DeleteTask): Promise<string> {
+    return this.taskRepo.deleteTaskById(data.taskId);
   }
 }
