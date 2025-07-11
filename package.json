@@ -5,14 +5,12 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky",
-    "lint": "npm run lint:backend && npm run lint:frontend",
-    "lint:backend": "nvm use 20.0.0 && cd sandbox-backend/functions && npm run lint",
-    "lint:frontend": "nvm use 20.11.1 && cd sandbox-frontend && npm run lint",
-    "test": "npm run test:frontend",
-    "test:frontend": "nvm use 20.11.1 && cd sandbox-frontend && npm run test",
-    "build": "npm run build:backend && npm run build:frontend",
-    "build:backend": "nvm use 20.0.0 && cd sandbox-backend/functions && npm run build",
-    "build:frontend": "nvm use 20.11.1 && cd sandbox-frontend && npm run build"
+    "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   },
   "keywords": [],
   "author": "",
