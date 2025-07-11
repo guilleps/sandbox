@@ -3,6 +3,7 @@
         "main"
     ],
     "tagFormat": "frontend@${version}",
+    "preset": "angular",
     "parserOpts": {
         "noteKeywords": [
             "BREAKING CHANGE",
@@ -60,6 +61,12 @@
         "@semantic-release/npm",
         "@semantic-release/github",
         [
+            "semantic-release-monorepo",
+            {
+                "packageRoot": "sandbox-frontend"
+            }
+        ],
+        [
             "@semantic-release/git",
             {
                 "assets": [
@@ -69,6 +76,5 @@
                 "message": "chore(release): frontend v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
             }
         ]
-    ],
-    "preset": "angular"
+    ]
 }
