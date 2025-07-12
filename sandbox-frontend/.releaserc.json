@@ -3,7 +3,6 @@
         "main"
     ],
     "tagFormat": "frontend@${version}",
-    "preset": "angular",
     "parserOpts": {
         "noteKeywords": [
             "BREAKING CHANGE",
@@ -55,17 +54,16 @@
         ]
     },
     "plugins": [
-        "@semantic-release/commit-analyzer",
+        [
+            "@semantic-release/commit-analyzer",
+            {
+                "preset": "angular"
+            }
+        ],
         "@semantic-release/release-notes-generator",
         "@semantic-release/changelog",
         "@semantic-release/npm",
         "@semantic-release/github",
-        [
-            "semantic-release-monorepo",
-            {
-                "packageRoot": "sandbox-frontend"
-            }
-        ],
         [
             "@semantic-release/git",
             {
