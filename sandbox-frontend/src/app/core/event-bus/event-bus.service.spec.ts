@@ -32,7 +32,6 @@ describe('EventBusService', () => {
 	});
 
 	it('should NOT emit an event if its no event type', done => {
-		t;
 		let wasCalled = false;
 
 		service.on('taskUpdated').subscribe(() => {
