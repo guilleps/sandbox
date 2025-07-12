@@ -1,5 +1,5 @@
-import { BaseFirestoreRepository, getRepository } from "fireorm";
-import { Task } from "../models/Task";
+import { BaseFirestoreRepository, getRepository } from 'fireorm';
+import { Task } from '../models/Task';
 
 /**
  * Repositorio que abstrae el acceso a la colección de tareas en Firestore(FireORM)
@@ -62,7 +62,7 @@ export class TaskRepository {
 	 * @example const userFounded = await taskRepo.findTasksByUserId("1223A");
 	 */
 	async findTasksByUserId(userId: string): Promise<Task[]> {
-		const tasks = await this.taskCollection.whereEqualTo("assignedToUserId", userId).find();
+		const tasks = await this.taskCollection.whereEqualTo('assignedToUserId', userId).find();
 		return tasks;
 	}
 }

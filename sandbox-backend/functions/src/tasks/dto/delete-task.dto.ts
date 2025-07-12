@@ -1,9 +1,9 @@
-import { IsNotEmpty } from "class-validator";
-import { Field, InputType } from "type-graphql";
+import { IsNotEmpty } from 'class-validator';
+import { Field, InputType } from 'type-graphql';
 
 @InputType()
 export class DeleteTask {
-  @Field()
-  @IsNotEmpty()
-  taskId!: string;
+	@Field()
+	@IsNotEmpty()
+	taskId!: string;
 }

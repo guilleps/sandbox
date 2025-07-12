@@ -1,9 +1,9 @@
-import { gql } from "apollo-server-express";
+import { gql } from 'apollo-server-express';
 
 // definimos el objeto User -- necesario para la descripcion de datos
 // CRUD -> R == query || C U D = mutation
 // query (operacion de lecture o consulta) -- ejecuta una consulta basada en convenciones propias, un punto de entrada
-// mutation (modificación del estado de un objeto) -- agregar 
+// mutation (modificación del estado de un objeto) -- agregar
 export const typeDefs = gql`
     type User {
         id: ID!

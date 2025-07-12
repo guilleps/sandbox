@@ -1,6 +1,9 @@
 {
   "name": "sandbox-backend",
   "version": "1.0.0",
+	"release": {
+		"extends": "semantic-release-monorepo"
+	},
   "engines": {
     "node": "20"
   },
@@ -8,14 +11,16 @@
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint \"src/**/*\"",
+    "prettier": "prettier --write \"src/**/*.ts\"",
     "build": "tsc",
     "build:watch": "tsc --watch",
     "serve": "npm run build && firebase emulators:start --only functions,firestore",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
-    "deploy": "firebase deploy --only functions,firestore",
+    "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log",
-    "commit": "cd .. && npx git-cz"
+		"release": "semantic-release",
+    "commit": "cd .. && nvm use 20.11.1 && npm run commit"
   },
   "keywords": [],
   "author": "",
@@ -36,11 +41,13 @@
     "@semantic-release/github": "^11.0.3",
     "@typescript-eslint/eslint-plugin": "^6.17.0",
     "@typescript-eslint/parser": "^6.17.0",
-    "eslint": "^7.6.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^5.0.0",
     "firebase-functions-test": "^0.2.0",
     "firebase-tools": "^13.0.2",
-    "prettier": "^2.8.4",
+    "prettier": "^3.2.5",
     "semantic-release-monorepo": "^8.0.2",
     "typescript": "^5.3.3"
   }

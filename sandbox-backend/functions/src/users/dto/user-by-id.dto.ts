@@ -1,9 +1,9 @@
-import { IsNotEmpty } from "class-validator";
-import { Field, InputType } from "type-graphql";
+import { IsNotEmpty } from 'class-validator';
+import { Field, InputType } from 'type-graphql';
 
 @InputType()
 export class UserById {
-  @Field()
-  @IsNotEmpty()
-  id!: string;
+	@Field()
+	@IsNotEmpty()
+	id!: string;
 }

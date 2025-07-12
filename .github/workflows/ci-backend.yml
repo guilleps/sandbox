@@ -24,7 +24,7 @@ jobs:
     defaults:
       run:
         working-directory: sandbox-backend/functions
-        
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -40,11 +40,11 @@ jobs:
 
       - name: Lint code
         run: npm run lint
-        
-      - name: Build application/backend 
+
+      - name: Build application/backend
         run: npm run build
 
       - name: Run semantic-release
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }} 
-        run: npx semantic-release
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: npm run release
