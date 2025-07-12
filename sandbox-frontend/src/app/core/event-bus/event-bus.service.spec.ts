@@ -2,25 +2,14 @@ import { TestBed } from '@angular/core/testing';
 
 import { EventBusService } from '@app/core/event-bus/event-bus.service';
 
-interface TestEventMap {
-	userCreated: {
-		id: string;
-		name: string;
-	};
-	taskUpdated: {
-		id: string;
-		done: boolean;
-	};
-}
-
 describe('EventBusService', () => {
-	let service: EventBusService<TestEventMap>;
+	let service: EventBusService;
 
 	beforeEach(() => {
 		TestBed.configureTestingModule({
 			providers: [EventBusService],
 		});
-		service = TestBed.inject(EventBusService<TestEventMap>);
+		service = TestBed.inject(EventBusService);
 	});
 
 	it('should be created', () => {
@@ -31,6 +20,7 @@ describe('EventBusService', () => {
 		const mockUse = {
 			id: '1',
 			name: 'William',
+			email: 'william@gmail.com',
 		};
 
 		service.on('userCreated').subscribe(data => {
@@ -42,13 +32,14 @@ describe('EventBusService', () => {
 	});
 
 	it('should NOT emit an event if its no event type', done => {
+		t;
 		let wasCalled = false;
 
 		service.on('taskUpdated').subscribe(() => {
 			wasCalled = true;
 		});
 
-		service.emit('userCreated', { id: '2', name: 'Deigo' });
+		service.emit('userCreated', { id: '2', name: 'Deigo', email: 'deigo@gmail.com' });
 
 		setTimeout(() => {
 			expect(wasCalled).toBeFalse();

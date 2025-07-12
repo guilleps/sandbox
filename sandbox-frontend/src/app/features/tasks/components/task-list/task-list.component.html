@@ -1,23 +1,23 @@
 <!-- eslint-disable @angular-eslint/template/label-has-associated-control -->
 @if (userId && tasks.length === 0) {
-<nz-card nzSize="small">
-    <p>No tiene tareas asignadas</p>
-</nz-card>
+	<nz-card nzSize="small">
+		<p>No tiene tareas asignadas</p>
+	</nz-card>
 }
 
 @if (tasks.length > 0) {
-<nz-card nzTitle="Tareas">
-    <nz-list nzBordered nzItemLayout="horizontal">
-        @for (t of tasks; track $index) {
-        <nz-list-item>
-            <label nz-checkbox [ngModel]="t.done" (ngModelChange)="onToggle(t)">
-                <span>{{ t.title }}</span>
-            </label>
-            <nz-tag [nzColor]="t.done ? 'green' : 'red'" class="ml-2">
-                {{ t.done ? 'Completada' : 'Pendiente' }}
-            </nz-tag>
-        </nz-list-item>
-        }
-    </nz-list>
-</nz-card>
+	<nz-card nzTitle="Tareas">
+		<nz-list nzBordered nzItemLayout="horizontal">
+			@for (t of tasks; track $index) {
+				<nz-list-item>
+					<label nz-checkbox [ngModel]="t.done" (ngModelChange)="onToggle(t)">
+						<span>{{ t.title }}</span>
+					</label>
+					<nz-tag [nzColor]="t.done ? 'green' : 'red'" class="ml-2">
+						{{ t.done ? 'Completada' : 'Pendiente' }}
+					</nz-tag>
+				</nz-list-item>
+			}
+		</nz-list>
+	</nz-card>
 }

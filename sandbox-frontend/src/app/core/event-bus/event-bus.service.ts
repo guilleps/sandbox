@@ -11,10 +11,10 @@ import { EventMap } from '../dto/event-map';
 @Injectable({
 	providedIn: 'root',
 })
-export class EventBusService<Events extends { [K in keyof Events]: unknown } = EventMap> {
+export class EventBusService {
 	private eventSubject = new Subject<{
-		name: keyof Events;
-		data: Events[keyof Events];
+		name: keyof EventMap;
+		data: EventMap[keyof EventMap];
 	}>();
 
 	/**
@@ -24,7 +24,7 @@ export class EventBusService<Events extends { [K in keyof Events]: unknown } = E
 	 *
 	 * @example eventBus.emit('userCreated', { id: '4231', name: 'Fernando', email: 'fernan@gmail.com' })
 	 */
-	emit<K extends keyof Events>(eventName: K, data: Events[K]): void {
+	emit<K extends keyof EventMap>(eventName: K, data: EventMap[K]): void {
 		console.log('eventName', eventName, 'data', data);
 		this.eventSubject.next({ name: eventName, data });
 	}
@@ -36,10 +36,10 @@ export class EventBusService<Events extends { [K in keyof Events]: unknown } = E
 	 *
 	 * @example eventBus.on('userCreated').subscribe(usr => console.log('[USER EVENT]', usr))
 	 */
-	on<K extends keyof Events>(eventName: K): Observable<Events[K]> {
+	on<K extends keyof EventMap>(eventName: K): Observable<EventMap[K]> {
 		return this.eventSubject.asObservable().pipe(
 			filter(event => event.name === eventName),
-			map(event => event.data as Events[K]),
+			map(event => event.data as EventMap[K]),
 		);
 	}
 }

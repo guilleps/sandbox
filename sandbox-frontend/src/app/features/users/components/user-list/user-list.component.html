@@ -1,16 +1,23 @@
 <nz-card nzTitle="Lista de usuarios" class="card-user-list">
-    <nz-list nzBordered nzItemLayout="horizontal">
-        @for (user of users; track $index) {
-        <nz-list-item>
-            <nz-list-item-meta [nzTitle]="user.name" [nzDescription]="user.email">
-            </nz-list-item-meta>
-            <button nz-button nzType="primary" nzSize="small" (click)="viewTasks(user.id)" title="Ver tareas del usuario" [nzShape]="'round'" class="list-button">
-                <nz-icon nzType="carry-out" nzTheme="outline" />
-                Ver tareas
-            </button>
-        </nz-list-item>
-        }
-    </nz-list>
+	<nz-list nzBordered nzItemLayout="horizontal">
+		@for (user of users; track $index) {
+			<nz-list-item>
+				<nz-list-item-meta [nzTitle]="user.name" [nzDescription]="user.email"> </nz-list-item-meta>
+				<button
+					nz-button
+					nzType="primary"
+					nzSize="small"
+					(click)="viewTasks(user.id)"
+					title="Ver tareas del usuario"
+					[nzShape]="'round'"
+					class="list-button"
+				>
+					<nz-icon nzType="carry-out" nzTheme="outline" />
+					Ver tareas
+				</button>
+			</nz-list-item>
+		}
+	</nz-list>
 
-     <app-task-list [userId]="selectedUserId" ></app-task-list>
+	<app-task-list [userId]="selectedUserId"></app-task-list>
 </nz-card>
