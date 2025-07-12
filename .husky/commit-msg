@@ -2,12 +2,13 @@
 
 GREEN='\033[0;32m'
 RED='\033[0;31m'
-NC='\033[0m' # No Color
 
 npx --no -- commitlint --edit "$1" && {
-  printf "Commit válido. Adelante...${NC}\n"
+  echo -e "${GREEN}Commit válido. Adelante...${RESET}"
 } || {
-  printf "Commit inválido. Usa el formato correcto.${NC}\n"
-  echo "- Para más información: https://www.conventionalcommits.org/en/v1.0.0/"
+  echo ""
+  echo -e "${RED}Commit inválido. Usa el formato correcto.${RESET}"
+  echo -e "- Para más información: https://www.conventionalcommits.org/en/v1.0.0/"
+  echo ""
   exit 1
 }
