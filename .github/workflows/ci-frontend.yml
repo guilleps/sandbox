@@ -6,58 +6,12 @@ on:
     branches: [ "main" ]
     paths:
       - 'sandbox-frontend/**'
-      - 'sandbox-frontend/package.json'
   pull_request:
     branches: [ "main" ]
     paths:
       - 'sandbox-frontend/**'
-      - 'sandbox-frontend/package.json'
 
 jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [20.11.1]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-    defaults:
-      run:
-        working-directory: sandbox-frontend
-
-    steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-      
-    - name: Install dependencies
-      # 1. elimina carpeta node_modules
-      # 3. instala dependencias desde package-lock.json
-      # 4. retorna un erorr si no coincide package-lock.json y package.json
-      run: npm ci
-
-    - name: Lint code
-      run: npm run lint
-
-    - name: Test code
-      run: npm run test -- --watch=false --browsers=ChromeHeadless
-
-    - name: Build app
-      run: npm run build
-      
-    - name: Deploy app Hosting
-      uses: FirebaseExtended/action-hosting-deploy@v0
-      with:
-        repoToken: "${{ secrets.GITHUB_TOKEN }}"
-        firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-        channelId: live
-        projectId: sandbox-ffdff
-        entryPoint: sandbox-frontend
-
   release:
     needs: build
     runs-on: ubuntu-latest
@@ -82,6 +36,15 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Lint code
+        run: npm run lint
+
+      - name: Test code
+        run: npm run test:ci
+
+      - name: Build app
+        run: npm run build
 
       - name: Run semantic-release
         env:
