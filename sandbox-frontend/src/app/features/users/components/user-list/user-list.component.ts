@@ -12,7 +12,6 @@ import { EventBusService } from '@app/core/event-bus/event-bus.service';
 })
 export class UserListComponent implements OnInit, OnDestroy {
 	users: UserDTO[] = [];
-	selectedUserId = '';
 	private subscriptions = new Subscription();
 
 	constructor(
@@ -24,8 +23,7 @@ export class UserListComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.loadUsers();
 
-		const sub = this.eventBus.on('userCreated').subscribe(nuevoUsuario => {
-			console.log('[ON] Evento userCreated recibido en USER-LIST:', nuevoUsuario);
+		const sub = this.eventBus.on('userCreated').subscribe(() => {
 			this.loadUsers();
 		});
 		this.subscriptions.add(sub);
@@ -38,12 +36,11 @@ export class UserListComponent implements OnInit, OnDestroy {
 	loadUsers(): void {
 		this.userService.getAllUsers().subscribe(usrs => {
 			this.users = usrs;
-			// console.log('[loadUsers] Usuarios actualizados:', this.users);
 			this.cdRef.detectChanges();
 		});
 	}
 
-	viewTasks(userId: string) {
-		this.selectedUserId = userId;
+	viewTasks(id: string) {
+		this.eventBus.emit('userSelected', { id });
 	}
 }

@@ -33,7 +33,6 @@ export class UserFormComponent {
 			this.form.reset();
 
 			this.eventBus.emit('userCreated', user);
-			console.log('[EMIT] Usuario creado:', user);
 		});
 	}
 }

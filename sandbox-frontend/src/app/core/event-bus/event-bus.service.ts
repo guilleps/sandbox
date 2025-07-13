@@ -25,7 +25,6 @@ export class EventBusService {
 	 * @example eventBus.emit('userCreated', { id: '4231', name: 'Fernando', email: 'fernan@gmail.com' })
 	 */
 	emit<K extends keyof EventMap>(eventName: K, data: EventMap[K]): void {
-		console.log('eventName', eventName, 'data', data);
 		this.eventSubject.next({ name: eventName, data });
 	}
 

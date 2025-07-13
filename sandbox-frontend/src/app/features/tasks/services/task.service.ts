@@ -58,8 +58,8 @@ export class TaskService {
 	 */
 	getTasksByUser(userId: string): Observable<TaskDTO[]> {
 		const GET_TASKS = gql`
-			query TaskByUser($userId: String!) {
-				taskByUser(userId: $userId) {
+			query FindTasksByUserId($userId: String!) {
+				findTasksByUserId(userId: $userId) {
 					id
 					title
 					description
@@ -70,11 +70,11 @@ export class TaskService {
 		`;
 
 		return this.apollo
-			.watchQuery<{ taskByUser: TaskDTO[] }>({
+			.watchQuery<{ findTasksByUserId: TaskDTO[] }>({
 				query: GET_TASKS,
 				variables: { userId },
 			})
-			.valueChanges.pipe(map(result => result.data.taskByUser));
+			.valueChanges.pipe(map(result => result.data.findTasksByUserId));
 	}
 
 	/**
@@ -88,8 +88,8 @@ export class TaskService {
 	 */
 	markTaskById(taskId: string, done: boolean): Observable<TaskDoneDTO> {
 		const MARK_TASK = gql`
-			mutation MarkTaskAsDone($data: MarkTaskAsDone!) {
-				markTaskAsDone(data: $data) {
+			mutation UpdateTaskStatusById($data: MarkTaskAsDone!) {
+				updateTaskStatusById(data: $data) {
 					id
 					title
 					done
@@ -98,10 +98,10 @@ export class TaskService {
 		`;
 
 		return this.apollo
-			.mutate<{ markTaskAsDone: TaskDoneDTO }>({
+			.mutate<{ updateTaskStatusById: TaskDoneDTO }>({
 				mutation: MARK_TASK,
 				variables: { data: { taskId, done } },
 			})
-			.pipe(map(res => res.data!.markTaskAsDone));
+			.pipe(map(res => res.data!.updateTaskStatusById));
 	}
 }

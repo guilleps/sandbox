@@ -26,7 +26,6 @@ export class TaskChartComponent implements OnInit, OnDestroy {
 		this.loadUsers();
 
 		const sub = this.eventBus.on('userCreated').subscribe(() => {
-			// console.log('[ON] Evento userCreated recibido en VISUAL:', nuevoUsuario);
 			this.loadUsers();
 		});
 		this.subscriptions.add(sub);
@@ -42,7 +41,6 @@ export class TaskChartComponent implements OnInit, OnDestroy {
 			// y es una llamada al pendiente
 			// en la espera de un resultado de una llamada asincronica
 			.subscribe(usrs => {
-				console.log('usrs', usrs);
 				this.users = usrs.map(u => ({
 					...u,
 					tasks: Array.isArray(u.tasks) ? [...u.tasks] : [],

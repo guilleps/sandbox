@@ -1,22 +1,5 @@
-.two-column-layout {
-	display: flex;
-	gap: 24px;
-	flex-wrap: wrap;
-}
-
-.column-left {
-	flex: 1 1 320px;
-	min-width: 320px;
-}
-
-.column-right {
-	flex: 2 1 600px;
-	min-width: 400px;
-}
-
 .user-form {
 	max-width: 400px;
-	margin-bottom: 24px;
 }
 
 .layout-user-form {
