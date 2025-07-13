@@ -29,7 +29,10 @@ async function startServer() {
 		app,
 		path: '/',
 		cors: {
-			origin: ['https://sandbox-ffdff.firebaseapp.com', 'http://127.0.0.1:5001/sandbox-ffdff/us-central1/graphql'],
+			origin: [
+				'https://sandbox-ffdff.firebaseapp.com',
+				'http://127.0.0.1:5001/sandbox-ffdff/us-central1/graphql',
+			],
 			methods: ['GET', 'POST', 'OPTIONS'],
 			allowedHeaders: ['Content-Type', 'Authorization'],
 		},
