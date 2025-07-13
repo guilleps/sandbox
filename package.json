@@ -1,27 +1,32 @@
 {
-  "name": "capacitacion-instrategy",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "engines": {
-    "node": "20.1.1"
-  },
-  "scripts": {
-    "prepare": "husky",
-    "commit": "git-cz"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
-    "commitlint": "^19.8.1",
-    "husky": "^9.1.7"
-  }
+	"name": "capacitacion-instrategy",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"engines": {
+		"node": "20.11.1"
+	},
+	"scripts": {
+		"prepare": "husky",
+		"commit": "git-cz",
+		"lint": "npm run lint:front && npm run lint:back",
+		"lint:front": "cd sandbox-frontend && nvm use 20.11.1 && npm run lint",
+		"lint:back": "cd sandbox-backend/functions && nvm use 20.0.0 && npm run lint",
+		"test": "npm run test:front",
+		"test:front": "cd sandbox-frontend && nvm use 20.11.1 && npm run test:ci"
+	},
+	"config": {
+		"commitizen": {
+			"path": "cz-conventional-changelog"
+		}
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@commitlint/cli": "^19.8.1",
+		"@commitlint/config-conventional": "^19.8.1",
+		"commitlint": "^19.8.1",
+		"husky": "^9.1.7"
+	}
 }
