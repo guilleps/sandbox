@@ -101,8 +101,8 @@ describe('TaskService', () => {
 			done();
 		});
 
-		const op = controller.expectOne('TaskByUser');
-		op.flush({ data: { taskByUser: mockTasks } });
+		const op = controller.expectOne('FindTasksByUserId');
+		op.flush({ data: { findTasksByUserId: mockTasks } });
 	});
 
 	it('should return empty list if user has no tasks', done => {
@@ -111,8 +111,8 @@ describe('TaskService', () => {
 			done();
 		});
 
-		const op = controller.expectOne('TaskByUser');
-		op.flush({ data: { taskByUser: [] } });
+		const op = controller.expectOne('FindTasksByUserId');
+		op.flush({ data: { findTasksByUserId: [] } });
 	});
 
 	it('should mark a task as done', done => {
@@ -128,7 +128,7 @@ describe('TaskService', () => {
 			done();
 		});
 
-		const op = controller.expectOne('MarkTaskAsDone');
-		op.flush({ data: { markTaskAsDone: expected } });
+		const op = controller.expectOne('UpdateTaskStatusById');
+		op.flush({ data: { updateTaskStatusById: expected } });
 	});
 });
