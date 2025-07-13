@@ -8,3 +8,10 @@
 - añadir mas funciones
 
 DEJAR DE LADO DESPLIEGUE
+
+Script for windows
+```bash
+nvm use $(Get-Content .nvmrc)
+```
+
+
