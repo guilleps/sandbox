@@ -7,6 +7,9 @@
 		"node": "20.11.1"
 	},
 	"scripts": {
+		"install:all": "npm install && npm run instal:front && npm run instal:back",
+		"install:front": "cd sandbox-frontend && nvm use 20.11.1 && npm install",
+		"install:back": "cd sandbox-backend/functions && nvm use 20.0.0 && npm install",
 		"prepare": "husky",
 		"commit": "git-cz",
 		"lint": "npm run lint:front && npm run lint:back",
