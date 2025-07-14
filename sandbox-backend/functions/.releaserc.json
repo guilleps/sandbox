@@ -1,70 +1,21 @@
 {
-    "branches": [
-        "main"
-    ],
-    "tagFormat": "backend@${version}",
-    "parserOpts": {
-        "noteKeywords": [
-            "BREAKING CHANGE",
-            "BREAKING CHANGES"
-        ]
-    },
-    "presetConfig": {
-        "types": [
-            {
-                "type": "feat",
-                "section": "🚀 Features"
-            },
-            {
-                "type": "fix",
-                "section": "🐞 Bug Fixes"
-            },
-            {
-                "type": "docs",
-                "section": "📝 Documentation"
-            },
-            {
-                "type": "style",
-                "section": "🎨 Styles"
-            },
-            {
-                "type": "refactor",
-                "section": "♻️ Refactors"
-            },
-            {
-                "type": "perf",
-                "section": "⚡ Performance"
-            },
-            {
-                "type": "test",
-                "section": "🧪 Tests"
-            },
-            {
-                "type": "build",
-                "section": "📦 Build"
-            },
-            {
-                "type": "ci",
-                "section": "🤖 CI"
-            },
-            {
-                "type": "chore",
-                "section": "🧹 Chores"
-            }
-        ]
-    },
-    "plugins": [
-        "@semantic-release/commit-analyzer",
-        "@semantic-release/release-notes-generator",
-        "@semantic-release/changelog",
-        "@semantic-release/npm",
-        "@semantic-release/github",
-        [
-         "@semantic-release/git",
-         {
-          "assets": ["CHANGELOG.md", "package.json"],
-          "message": "chore(release): backend v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-         }
-        ]
-    ]
+	"branches": ["main"],
+	"tagFormat": "backend@${version}",
+	"parserOpts": {
+		"noteKeywords": ["BREAKING CHANGE", "BREAKING CHANGES"]
+	},
+	"plugins": [
+		"@semantic-release/commit-analyzer",
+		"@semantic-release/release-notes-generator",
+		"@semantic-release/changelog",
+		"@semantic-release/npm",
+		"@semantic-release/github",
+		[
+			"@semantic-release/git",
+			{
+				"assets": ["CHANGELOG.md", "package.json"],
+				"message": "chore(release): backend v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+			}
+		]
+	]
 }
