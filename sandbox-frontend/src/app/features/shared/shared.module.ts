@@ -11,6 +11,8 @@ import { NzListModule } from 'ng-zorro-antd/list';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzAlertModule } from 'ng-zorro-antd/alert';
 
 @NgModule({
 	imports: [
@@ -26,6 +28,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 		NzTagModule,
 		NzSelectModule,
 		NzInputModule,
+		NzAvatarModule,
+		NzAlertModule,
 	],
 	exports: [
 		NzButtonModule,
@@ -39,6 +43,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 		NzTagModule,
 		NzSelectModule,
 		NzInputModule,
+		NzAvatarModule,
+		NzAlertModule,
 	],
 })
 export class SharedModule {}
