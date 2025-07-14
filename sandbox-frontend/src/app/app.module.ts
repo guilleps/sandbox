@@ -18,12 +18,20 @@ import { FormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { AppComponent } from '@app/app.component';
 import { environment } from '@environments/environment';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 registerLocaleData(es);
 
 @NgModule({
 	declarations: [AppComponent],
-	imports: [BrowserModule, NzLayoutModule, RouterModule.forRoot(routes)],
+	imports: [
+		BrowserModule,
+		NzLayoutModule,
+		NzCardModule,
+		NzIconModule,
+		RouterModule.forRoot(routes),
+	],
 	providers: [
 		provideZoneChangeDetection({ eventCoalescing: true }),
 		provideRouter(routes),

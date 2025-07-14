@@ -10,5 +10,13 @@
 
 	<nz-content class="content">
 		<router-outlet />
+		@if (router.url !== '/user-tasks') {
+			<nz-card class="button-navigate" (click)="navigateToUserTasks()">
+				<div class="card-content">
+					<nz-icon nzType="idcard" nzTheme="fill" class="icon-button" />
+					<span class="text-button">Gestión de usuarios</span>
+				</div>
+			</nz-card>
+		}
 	</nz-content>
 </nz-layout>

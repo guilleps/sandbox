@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
 	{
-		path: 'user-tasks',
+		path: '',
 		loadChildren: () =>
 			import('./features/dashboard/dashboard.module').then(m => m.DashboardModule),
 	},

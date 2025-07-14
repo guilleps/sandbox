@@ -7,3 +7,42 @@
 	padding: 24px;
 	min-height: calc(100vh - 64px - 70px);
 }
+
+.button-navigate {
+	width: 100%;
+	text-align: center;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	transform: translateY(-2px);
+	transition: all 0.3s ease;
+	cursor: pointer;
+	padding: 16px;
+}
+
+.card-content {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.icon-button {
+	font-size: 24px;
+	height: 24px;
+	width: 24px;
+	line-height: 24px;
+}
+
+.icon-header {
+	color: #fff;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.text-button {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.button-navigate:hover {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+	transform: translateY(-3px);
+}

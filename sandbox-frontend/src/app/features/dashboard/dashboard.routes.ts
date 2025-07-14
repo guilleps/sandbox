@@ -3,7 +3,7 @@ import { DashboardComponent } from '@app/features/dashboard/dashboard.component'
 
 export const dashboardRoutes: Routes = [
 	{
-		path: '',
+		path: 'user-tasks',
 		component: DashboardComponent,
 	},
 	{
